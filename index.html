@@ -8,8 +8,12 @@
   crossorigin="anonymous"></script>
   <script src="app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css">
-    <title></title>
+    <title>Decide and Play</title>
   </head>
+  <header>
+    <h1>Decide and Play</h1>
+    <h3>Less choosing, more gaming</h3>
+  </header>
   <body>
     <div class="search-section">
       <form class="search-form" action="index.html" method="post">
@@ -17,16 +21,50 @@
         <input type="submit" value="sumbit" id="search-btn">
       </form>
     </div>
-    <div class="results-display">
+    <aside class="results-display">
 
       <!-- <form class="results-options" action="index.html" method="post">
       </form> -->
-    </div>
-    <article class="game1-display">
+    </aside>
+    <article class="display-game1">
+      <h1 id="title-game1"></h1>
+      <img id="image-game1" src="" alt="" title="">
+      <dl>
+        <dt>Description</dt>
+        <dd id="description-game1"></dd>
 
+        <dt>Number of players</dt>
+        <dd id="players-game1"></dd>
+
+        <dt>Playtime</dt>
+        <dd id="playtime-game1"></dd>
+
+        <dt>Rules</dt>
+        <dd><a href="" id="rules-game1" target="_blank">Check out the Rules</a></dd>
+
+        <dt>Number of Mentions on /r/boardgames</dt>
+        <dd id="reddit-game1"></dd>
+      </dl>
     </article>
-    <article class="game2-display">
+    <article class="display-game2">
+      <h1 id="title-game2"></h1>
+      <img id="image-game2" src="" alt="" title="">
+      <dl>
+        <dt>Description</dt>
+        <dd id="description-game2"></dd>
 
+        <dt>Number of players</dt>
+        <dd id="players-game2"></dd>
+
+        <dt>Playtime</dt>
+        <dd id="playtime-game2"></dd>
+
+        <dt>Rules</dt>
+        <dd><a href="" id="rules-game2" target="_blank">Check out the Rules</a></dd>
+
+        <dt>Number of Mentions on /r/boardgames</dt>
+        <dd id="reddit-game2"></dd>
+      </dl>
     </article>
   </body>
 </html>
