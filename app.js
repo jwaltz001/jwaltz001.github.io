@@ -1,16 +1,24 @@
 //console.log($);
 $(() => {
+//===============Search Div=============================
+let searchTerms = "";
+$("form").on("submit", (event) => {
+    event.preventDefault();
+    searchTerms = $("input[type='text']").val();
+    bgaUrlInsert = bgaSearchUrl;
+    console.log(searchTerms);
+    console.log(bgaSearchUrl);
+    getBgaData();
+  });
 
 //================API URL Variables=============================
-const bgaVariables ={
-  urlInsert: "",
-  searchTerms: "",
-  searchURL: "search?name="+this.searchTerms+"&limit=10"
-};
+let bgaUrlInsert = "";
+let bgaSearchUrl = "search?name="+searchTerms+"&limit=10";
+
 //===============API Call Functions=============================
 const getBgaData = () => {
   $.ajax({
-        url:"https://www.boardgameatlas.com/api/"+bgaVariables.searchURL+"&client_id=tIPZB6stZR",
+        url:"https://www.boardgameatlas.com/api/"+bgaUrlInsert+"&client_id=tIPZB6stZR",
       }).then(
         (data) => {
           console.log(data);
@@ -23,15 +31,5 @@ const getBgaData = () => {
         }
       );
     };
-
-
-//===============Search Div=============================
-
-$("form").on("submit", (event) => {
-  event.preventDefault();
-  bgaVariables.searchTerms = $("input[type='text']").val();
-  console.log(bgaVariables.searchTerms);
-  getBgaData();
-});
 
 });
