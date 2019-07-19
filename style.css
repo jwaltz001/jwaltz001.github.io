@@ -1,34 +1,54 @@
 /* ========================General Formatting===================== */
 body {
-  padding: 1em;
+  margin: 0;
+  padding: 0;
   font-family: 'Cinzel', serif;
 }
 /* ========================Header===================== */
 header {
+  height: 15em;
   display: flex;
   flex-flow: column;
+  justify-content: flex-start;
   align-items: center;
   border-bottom: 1pt solid grey;
+  color: white;
   font-weight: 700;
-  padding: 1em;
+  padding: 0;
+  background-image: url("https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-position: center;
+  background-size: cover;
+}
+.header-filter {
+  background: rgba(0,0,0,.3);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-filter > h1{
+  font-size: 50pt;
 }
 header h1, h3 {
   margin: 0;
 }
 .logo {
   font-weight: 900;
-  margin-bottom: 1em;
+  margin: 0 1.5em 1em 1.5em;
 }
 /* ========================Main Section of App===================== */
 main {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  padding: 1em;
 }
     /* ==============Search for Games===============*/
 .search-section {
   width: 90%;
-  height: 7em;
+  height: 10em;
   margin: 0;
   padding: 1em;
   display: flex;
@@ -36,18 +56,34 @@ main {
   align-items: center;
   border-bottom: 1pt solid grey;
 }
-
+.about-tab {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+/* used how to on w3schools for arrow https://www.w3schools.com/howto/howto_css_arrows.asp */
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 7px;
+  transform: rotate(45deg);
+}
+.search-bar {
+  margin: 1em 0;
+}
 input {
   font-size: 15pt;
   font-family: 'Cinzel', serif;
-}
-.search-bar {
-  margin-bottom: 1em;
 }
 #search-btn {
   border: 1pt solid black;
   background: transparent;
   padding: .25em;
+}
+#search-btn:hover {
+  background: black;
+  color: white;
 }
 .results-display button {
   border: 1pt solid grey;
@@ -55,11 +91,16 @@ input {
   margin: .25em;
   font-size: 12pt;
 }
+.results-display button:hover {
+  background: black;
+  color: white;
+}
 
-    /* ==============Games to compare/Display===============*/
+  /* ==============Games to compare/Display===============*/
+    /* =======Both Displays======== */
 .game-displays {
   width: 95%;
-  height: 30em;
+  height: 45em;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
@@ -69,27 +110,76 @@ input {
 /* fix space between shadow and bottom border */
 .display-cards {
   width: 40%;
-  height: 25em;
+  height: 40em;
   margin: 0 2em;
   text-align: center;
   border: 2pt solid black;
   border-top-right-radius: 7pt;
   border-top-left-radius: 7pt;
   border-bottom: transparent;
-  box-shadow: 5px -1px;
+  box-shadow: 5px 0;
 }
 .display-cards > img {
   width: auto;
   height: 30%;
 }
-.display-cards dd {
+dt {
+  font-weight: 700;
+}
+dd {
   text-align: left;
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 15pt;
 }
 /* Come back and change to a "read more" button that expands and retracts the game description or display short desc. from API and then full desc. with modal */
 .game-descriptions {
   height: 5em;
   overflow-y: scroll;
+  margin-right: 2em;
+}
+    /* =======Random Selector======== */
+.random-selector {
+  height: 8em;
+  margin: 2em;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.randomizer-button {
+  width: 7em;
+  padding: .5em;
+}
+.randomizer-button:hover {
+  border: 1pt solid black;
+}
+#dice-roll-img {
+  width: 95%;
+  height: auto;
+}
+    /* =======Lower Display======== */
+#lower-game-display {
+  border-top: 3pt solid black;
+  border-bottom: 3pt solid black;
+  border-radius: 7pt;
 }
 
-
+/* ========================Modals===================== */
+  /* =======More Info====== */
+#info-modal {
+  background: rgba(0, 0, 0, .4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  overflow: auto;
+  display: none;
+}
+#info-modal-textbox {
+  margin: 200px auto;
+  box-shadow: 5px 0;
+  background: white;
+  width: 500px;
+}
 /* ========================Footer===================== */

@@ -11,4 +11,7 @@ GitHub Repo: https://github.com/jwaltz001/jwaltz001.github.io
 ## API Used for Info and Statistics
 https://www.boardgameatlas.com/api/docs
 
-dice image: https://pngimg.com/license
+random dice image: https://pngimg.com/license
+header image: https://www.pexels.com/photo/blur-board-game-business-challenge-278918/
+viking: Photo by Pascal Bernardon on Unsplash
+D20: Photo by Ian Gonzalez on Unsplash

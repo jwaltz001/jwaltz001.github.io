@@ -13,14 +13,20 @@
   </head>
   <body>
     <header>
+      <div class="header-filter">
       <nav>
         <h1 class="logo">D&P</h1>
       </nav>
-      <h1>Decide & Play</h1>
-      <h3>Less time choosing, more time gaming</h3>
+        <h1>Decide & Play</h1>
+        <h3>Less time choosing, more time gaming</h3>
+      </div>
     </header>
     <main>
       <section class="search-section">
+        <div class="about-tab">
+          <h3>About</h3>
+        </div>
+        <i class="arrow down"></i>
         <div class="search-bar">
           <form class="search-form" action="index.html" method="post">
             <input type="text" id="search-input" value="" placeholder="Enter game title">
@@ -28,18 +34,41 @@
           </form>
         </div>
         <div class="results-display">
-
-          <!-- <form class="results-options" action="index.html" method="post">
-          </form> -->
+          <!-- buttons added with jquery -->
         </div>
       </section>
       <section class="game-displays" id="upper-game-display">
+        <div class="display-cards" id="display-card0">
+          <h1 id="title-game0"></h1>
+          <img id="image-game0" src="" alt="" title="">
+          <dl>
+            <dt>Year Published</dt>
+            <dd class= "year-game0" id="year-game0"></dd>
+
+            <dt>Number of players</dt>
+            <dd id="players-game0"></dd>
+
+            <dt>Playtime</dt>
+            <dd id="playtime-game0"></dd>
+
+            <dt>MSRP</dt>
+            <dd id="price-game0"></dd>
+
+            <dt>Number of Mentions on /r/boardgames</dt>
+            <dd id="reddit-game0"></dd>
+
+            <dt>Average Rating on Board Game Atlas<dt>
+            <dd id="rating-game0">
+          </dl>
+          <button type="button" class="choose-game-btn" id="choose-game-btn0">Choose</button>
+          <button type="button" class="info-game-btn" id="info-game-btn0">More Info</button>
+        </div>
         <div class="display-cards" id="display-card1">
           <h1 id="title-game1"></h1>
           <img id="image-game1" src="" alt="" title="">
           <dl>
-            <dt>Description</dt>
-            <dd class= "game-descriptions" id="description-game1"></dd>
+            <dt>Year Published</dt>
+            <dd class= "year-game1" id="year-game1"></dd>
 
             <dt>Number of players</dt>
             <dd id="players-game1"></dd>
@@ -47,19 +76,32 @@
             <dt>Playtime</dt>
             <dd id="playtime-game1"></dd>
 
-            <dt>Rules</dt>
-            <dd><a href="" id="rules-game1" target="_blank">Check out the Rules</a></dd>
+            <dt>MSRP</dt>
+            <dd id="price-game1"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
             <dd id="reddit-game1"></dd>
+
+            <dt>Average Rating on Board Game Atlas<dt>
+            <dd id="rating-game1">
           </dl>
+          <button type="button" class="choose-game-btn" id="choose-game-btn1">Choose</button>
+          <button type="button" class="info-game-btn" id="info-game-btn1">More Info</button>
         </div>
+      </section>
+      <section class="random-selector">
+        <div class="randomizer-button">
+          <img id="dice-roll-img" src="dice.png" alt="">
+          <h3>Choose for me</h3>
+        </div>
+      </section>
+      <section class="game-displays" id="lower-game-display">
         <div class="display-cards" id="display-card2">
           <h1 id="title-game2"></h1>
           <img id="image-game2" src="" alt="" title="">
           <dl>
-            <dt>Description</dt>
-            <dd class= "game-descriptions" id="description-game2"></dd>
+            <dt>Year Published</dt>
+            <dd class= "year-game2" id="year-game2"></dd>
 
             <dt>Number of players</dt>
             <dd id="players-game2"></dd>
@@ -67,24 +109,24 @@
             <dt>Playtime</dt>
             <dd id="playtime-game2"></dd>
 
-            <dt>Rules</dt>
-            <dd><a href="" id="rules-game2" target="_blank">Check out the Rules</a></dd>
+            <dt>MSRP</dt>
+            <dd id="price-game2"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
             <dd id="reddit-game2"></dd>
-          </dl>
-        </div>
-      </section>
-      <section class="random-selector">
 
-      </section>
-      <section class="game-displays" id="lower-game-display">
+            <dt>Average Rating on Board Game Atlas<dt>
+            <dd id="rating-game2">
+          </dl>
+          <button type="button" class="choose-game-btn" id="choose-game-btn2">Choose</button>
+          <button type="button" class="info-game-btn" id="info-game-btn2">More Info</button>
+        </div>
         <div class="display-cards" id="display-card3">
           <h1 id="title-game3"></h1>
           <img id="image-game3" src="" alt="" title="">
           <dl>
-            <dt>Description</dt>
-            <dd class= "game-descriptions" id="description-game3"></dd>
+            <dt>Year Published</dt>
+            <dd class= "year-game3" id="year-game3"></dd>
 
             <dt>Number of players</dt>
             <dd id="players-game3"></dd>
@@ -92,35 +134,43 @@
             <dt>Playtime</dt>
             <dd id="playtime-game3"></dd>
 
-            <dt>Rules</dt>
-            <dd><a href="" id="rules-game3" target="_blank">Check out the Rules</a></dd>
+            <dt>MSRP</dt>
+            <dd id="price-game3"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
             <dd id="reddit-game3"></dd>
+
+            <dt>Average Rating on Board Game Atlas<dt>
+            <dd id="rating-game3">
           </dl>
-        </div>
-        <div class="display-cards" id="display-card4">
-          <h1 id="title-game4"></h1>
-          <img id="image-game4" src="" alt="" title="">
-          <dl>
-            <dt>Description</dt>
-            <dd class= "game-descriptions" id="description-game4"></dd>
-
-            <dt>Number of players</dt>
-            <dd id="players-game4"></dd>
-
-            <dt>Playtime</dt>
-            <dd id="playtime-game4"></dd>
-
-            <dt>Rules</dt>
-            <dd><a href="" id="rules-game4" target="_blank">Check out the Rules</a></dd>
-
-            <dt>Number of Mentions on /r/boardgames</dt>
-            <dd id="reddit-game4"></dd>
-          </dl>
+          <button type="button" class="choose-game-btn" id="choose-game-btn3">Choose</button>
+          <button type="button" class="info-game-btn" id="info-game-btn3">More Info</button>
         </div>
       </section>
     </main>
+    <div id="info-modal">
+      <div id="info-modal-textbox">
+        <h1 id = "info-title"></h1>
+        <img id="info-image" src="" alt="" title="">
+        <dl>
+          <dt>Description</dt>
+          <dd id="info-description"></dd>
+
+          <!-- <dt>Number of players</dt>
+          <dd id="info-players"></dd> -->
+
+          <dt>Game Website</dt>
+          <dd><a id="info-website" href="" target="_blank">Visit Official Website</a> </dd>
+
+          <dt>Rules</dt>
+          <dd><a href="" id="info-rules" target="_blank">Check out the Rules</a></dd>
+
+          <dt>Videos</dt>
+          <dd id="info-reddit"></dd>
+        </dl>
+        <a id="info-close" href="#">Close</a>
+      </div>
+    </div>
     <footer>
 
     </footer>

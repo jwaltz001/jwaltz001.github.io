@@ -38,8 +38,8 @@ const getBgaSearchResults = () => {
 
     //=======Game display call=========
 let numOfGames = 0;
+let selectedGames = [];
 const getGameInfo = (event) => {
-  numOfGames++;
   const $gameId = $(event.target).val();
   bgaUrlInsert = "https://www.boardgameatlas.com/api/search?ids="+$gameId+"&client_id=tIPZB6stZR";
   $.ajax({
@@ -47,21 +47,39 @@ const getGameInfo = (event) => {
       }).then(
         (data) => {
           //console.log(data);
-          selectedObj = data.games[0];
+          const selectedObj = data.games[0];
+          selectedGames.push(selectedObj);
+          $("#info-game-btn"+numOfGames).attr("value", numOfGames);
           $("#title-game"+numOfGames).text(selectedObj.name);
           $("#image-game"+numOfGames).attr("src", selectedObj.thumb_url);
-          $("#description-game"+numOfGames).text(selectedObj.description_preview);
+          $("#year-game"+numOfGames).text(selectedObj.year_published);
 //good place for string interpolation?
           $("#players-game"+numOfGames).text("Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
           $("#playtime-game"+numOfGames).text("Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
-          $("#rules-game"+numOfGames).attr("href" , selectedObj.rules_url);
+          $("#price-game"+numOfGames).text("$" + selectedObj.msrp);
           $("#reddit-game"+numOfGames).text(selectedObj.reddit_all_time_count + " (Since Sept. 2018)" + "  " + selectedObj.reddit_week_count + "(In the past week)");
-          console.log(selectedObj);
+          $("#rating-game"+numOfGames).text(selectedObj.average_user_rating.toFixed(2));
+          numOfGames++;
         },
         (error) => {
           console.log(error);
         }
       );
+
 };
 
+    //=======More info call=========
+const getMoreInfo = (event) => {
+  const $gameArrIndex = $(event.target).val();
+  $("#info-title").text(selectedGames[$gameArrIndex].name);
+  $("#info-description").text(selectedGames[$gameArrIndex].description_preview);
+  $("#info-rules").attr("href", selectedGames[$gameArrIndex].rules_url);
+  $("#info-website").attr("href", selectedGames[$gameArrIndex].official_url);
+  $("#info-close").on("click", () => {
+    $("#info-modal").hide();
+  });
+  $("#info-modal").show();
+  //**************** insert game videos***************
+};
+$(".info-game-btn").on("click", getMoreInfo);
 });
