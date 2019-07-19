@@ -10,3 +10,5 @@ GitHub Repo: https://github.com/jwaltz001/jwaltz001.github.io
 
 ## API Used for Info and Statistics
 https://www.boardgameatlas.com/api/docs
+
+dice image: https://pngimg.com/license
