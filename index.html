@@ -8,63 +8,76 @@
   crossorigin="anonymous"></script>
   <script src="app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css">
-    <title>Decide and Play</title>
+  <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900|Darker+Grotesque:400,700&display=swap" rel="stylesheet">
+    <title>D&P</title>
   </head>
-  <header>
-    <h1>Decide and Play</h1>
-    <h3>Less choosing, more gaming</h3>
-  </header>
   <body>
-    <div class="search-section">
-      <form class="search-form" action="index.html" method="post">
-        <input type="text" id="search-bar" value="" placeholder="Enter game title">
-        <input type="submit" value="sumbit" id="search-btn">
-      </form>
-    </div>
-    <aside class="results-display">
+    <header>
+      <nav>
+        <h1 class="logo">D&P</h1>
+      </nav>
+      <h1>Decide & Play</h1>
+      <h3>Less time choosing, more time gaming</h3>
+    </header>
+    <main>
+      <section class="search-section">
+        <div class="search-bar">
+          <form class="search-form" action="index.html" method="post">
+            <input type="text" id="search-input" value="" placeholder="Enter game title">
+            <input type="submit" value="sumbit" id="search-btn">
+          </form>
+        </div>
+        <div class="results-display">
 
-      <!-- <form class="results-options" action="index.html" method="post">
-      </form> -->
-    </aside>
-    <article class="display-game1">
-      <h1 id="title-game1"></h1>
-      <img id="image-game1" src="" alt="" title="">
-      <dl>
-        <dt>Description</dt>
-        <dd id="description-game1"></dd>
+          <!-- <form class="results-options" action="index.html" method="post">
+          </form> -->
+        </div>
+      </section>
+      <section class="game-displays">
+        <div class="display-cards" id="display-card1">
+          <h1 id="title-game1"></h1>
+          <img id="image-game1" src="" alt="" title="">
+          <dl>
+            <dt>Description</dt>
+            <dd class= "game-descriptions" id="description-game1"></dd>
 
-        <dt>Number of players</dt>
-        <dd id="players-game1"></dd>
+            <dt>Number of players</dt>
+            <dd id="players-game1"></dd>
 
-        <dt>Playtime</dt>
-        <dd id="playtime-game1"></dd>
+            <dt>Playtime</dt>
+            <dd id="playtime-game1"></dd>
 
-        <dt>Rules</dt>
-        <dd><a href="" id="rules-game1" target="_blank">Check out the Rules</a></dd>
+            <dt>Rules</dt>
+            <dd><a href="" id="rules-game1" target="_blank">Check out the Rules</a></dd>
 
-        <dt>Number of Mentions on /r/boardgames</dt>
-        <dd id="reddit-game1"></dd>
-      </dl>
-    </article>
-    <article class="display-game2">
-      <h1 id="title-game2"></h1>
-      <img id="image-game2" src="" alt="" title="">
-      <dl>
-        <dt>Description</dt>
-        <dd id="description-game2"></dd>
+            <dt>Number of Mentions on /r/boardgames</dt>
+            <dd id="reddit-game1"></dd>
+          </dl>
+        </div>
+        <div class="display-cards" id="display-card2">
+          <h1 id="title-game2"></h1>
+          <img id="image-game2" src="" alt="" title="">
+          <dl>
+            <dt>Description</dt>
+            <dd class= "game-descriptions" id="description-game2"></dd>
 
-        <dt>Number of players</dt>
-        <dd id="players-game2"></dd>
+            <dt>Number of players</dt>
+            <dd id="players-game2"></dd>
 
-        <dt>Playtime</dt>
-        <dd id="playtime-game2"></dd>
+            <dt>Playtime</dt>
+            <dd id="playtime-game2"></dd>
 
-        <dt>Rules</dt>
-        <dd><a href="" id="rules-game2" target="_blank">Check out the Rules</a></dd>
+            <dt>Rules</dt>
+            <dd><a href="" id="rules-game2" target="_blank">Check out the Rules</a></dd>
 
-        <dt>Number of Mentions on /r/boardgames</dt>
-        <dd id="reddit-game2"></dd>
-      </dl>
-    </article>
+            <dt>Number of Mentions on /r/boardgames</dt>
+            <dd id="reddit-game2"></dd>
+          </dl>
+        </div>
+      </section>
+    </main>
+    <footer>
+
+    </footer>
   </body>
 </html>

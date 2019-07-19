@@ -1,0 +1,78 @@
+/* ========================General Formatting===================== */
+body {
+  padding: 1em;
+  font-family: 'Cinzel', serif;
+}
+/* ========================Header===================== */
+header {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  border-bottom: 1pt solid grey;
+  font-weight: 700;
+  padding: 1em;
+}
+header h1, h3 {
+  margin: 0;
+}
+.logo {
+  font-weight: 900;
+  margin-bottom: 1em;
+}
+/* ========================Main Section of App===================== */
+main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+    /* ==============Search for Games===============*/
+.search-section {
+  width: 90%;
+  height: 3em;
+  margin: 0;
+  padding: 1em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+input {
+  font-size: 15pt;
+  font-family: 'Cinzel', serif;
+}
+
+.results-display button {
+  border: 1pt solid grey;
+  padding: .25em
+
+}
+
+    /* ==============Games to compare/Display===============*/
+.game-displays {
+  width: 95%;
+  height: 30em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+.display-cards {
+  width: 40%;
+  height: 25em;
+  margin: 0 2em;
+  text-align: center;
+}
+.display-cards > img {
+  width: auto;
+  height: 30%;
+}
+.display-cards dd {
+  text-align: left;
+}
+/* Come back and change to a "read more" button that expands and retracts the game description or display short desc. from API and then full desc. with modal */
+.game-descriptions {
+  height: 5em;
+  overflow-y: scroll;
+}
+
+
+/* ========================Footer===================== */
