@@ -68,6 +68,7 @@ const getGameInfo = (event) => {
 
 };
 
+
     //=======More info call=========
 const getMoreInfo = (event) => {
   const $gameArrIndex = $(event.target).val();
@@ -78,8 +79,22 @@ const getMoreInfo = (event) => {
   $("#info-close").on("click", () => {
     $("#info-modal").hide();
   });
+  getVideo();
   $("#info-modal").show();
   //**************** insert game videos***************
 };
 $(".info-game-btn").on("click", getMoreInfo);
+
+const getVideo = () => {
+  const $gameId = selectedGames[$(event.target).val()].id;
+  bgaUrlInsert = "https://www.boardgameatlas.com/api/game/videos?limit=5&game_id="+$gameId+"&client_id=tIPZB6stZR";
+  $.ajax({
+        url: bgaUrlInsert,
+      }).then(
+        (data) => {
+          console.log(data);
+          $("#info-video").attr("src", data.videos[0].url);
+        });
+  };
+
 });
