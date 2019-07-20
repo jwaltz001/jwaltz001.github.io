@@ -48,7 +48,7 @@ main {
     /* ==============Search for Games===============*/
 .search-section {
   width: 90%;
-  height: 10em;
+  /* height: 10em; */
   margin: 0;
   padding: 1em;
   display: flex;
@@ -109,7 +109,7 @@ input {
 }
 /* fix space between shadow and bottom border */
 .display-cards {
-  width: 40%;
+  width: 48%;
   height: 40em;
   margin: 0 2em;
   text-align: center;
@@ -118,6 +118,7 @@ input {
   border-top-left-radius: 7pt;
   border-bottom: transparent;
   box-shadow: 5px 0;
+  display: none;
 }
 .display-cards > img {
   width: auto;
@@ -137,31 +138,35 @@ dd {
   overflow-y: scroll;
   margin-right: 2em;
 }
-    /* =======Random Selector======== */
-.random-selector {
-  height: 8em;
-  margin: 2em;
-  display: flex;
-  align-items: center;
-  text-align: center;
-}
-.randomizer-button {
-  width: 7em;
-  padding: .5em;
-}
-.randomizer-button:hover {
-  border: 1pt solid black;
-}
-#dice-roll-img {
-  width: 95%;
-  height: auto;
-}
     /* =======Lower Display======== */
 #lower-game-display {
   border-top: 3pt solid black;
   border-bottom: 3pt solid black;
   border-radius: 7pt;
 }
+    /* =======Random Selector======== */
+.random-selector {
+  margin-bottom: 2em;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+.randomizer-button {
+  width: 7em;
+  padding: .5em;
+
+}
+.randomizer-button:hover {
+  outline: 1pt solid black;
+}
+#dice-roll-img {
+  width: 95%;
+  height: auto;
+}
+
 
 /* ========================Modals===================== */
   /* =======More Info====== */
@@ -180,6 +185,25 @@ dd {
   margin: 200px auto;
   box-shadow: 5px 0;
   background: white;
-  width: 500px;
+  width: 90%;
+  padding: 1em;
+}
+#info-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#vids-dd {
+  display: flex;
+  align-items: flex-end;
+}
+.info-video-div {
+  display: flex;
+  flex-flow: column wrap;
+  width:30%;
+  margin: .25em;
+}
+.info-video-div p {
+  margin-top: 0;
 }
 /* ========================Footer===================== */

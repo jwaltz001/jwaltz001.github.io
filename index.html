@@ -51,7 +51,7 @@
             <dt>Playtime</dt>
             <dd id="playtime-game0"></dd>
 
-            <dt>MSRP</dt>
+            <dt>Price (MSRP)</dt>
             <dd id="price-game0"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
@@ -64,8 +64,8 @@
           <button type="button" class="info-game-btn" id="info-game-btn0">More Info</button>
         </div>
         <div class="display-cards" id="display-card1">
-          <h1 id="title-game1"></h1>
-          <img id="image-game1" src="" alt="" title="">
+            <h1 id="title-game1"></h1>
+            <img id="image-game1" src="" alt="" title="">
           <dl>
             <dt>Year Published</dt>
             <dd class= "year-game1" id="year-game1"></dd>
@@ -76,7 +76,7 @@
             <dt>Playtime</dt>
             <dd id="playtime-game1"></dd>
 
-            <dt>MSRP</dt>
+            <dt>Price (MSRP)</dt>
             <dd id="price-game1"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
@@ -87,12 +87,6 @@
           </dl>
           <button type="button" class="choose-game-btn" id="choose-game-btn1">Choose</button>
           <button type="button" class="info-game-btn" id="info-game-btn1">More Info</button>
-        </div>
-      </section>
-      <section class="random-selector">
-        <div class="randomizer-button">
-          <img id="dice-roll-img" src="dice.png" alt="">
-          <h3>Choose for me</h3>
         </div>
       </section>
       <section class="game-displays" id="lower-game-display">
@@ -109,7 +103,7 @@
             <dt>Playtime</dt>
             <dd id="playtime-game2"></dd>
 
-            <dt>MSRP</dt>
+            <dt>Price (MSRP)</dt>
             <dd id="price-game2"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
@@ -134,7 +128,7 @@
             <dt>Playtime</dt>
             <dd id="playtime-game3"></dd>
 
-            <dt>MSRP</dt>
+            <dt>Price (MSRP)</dt>
             <dd id="price-game3"></dd>
 
             <dt>Number of Mentions on /r/boardgames</dt>
@@ -147,17 +141,26 @@
           <button type="button" class="info-game-btn" id="info-game-btn3">More Info</button>
         </div>
       </section>
+      <section class="random-selector">
+          <h2>Still can't decide?</h2>
+          <div class="randomizer-button">
+          <img id="dice-roll-img" src="dice.png" alt="">
+          <h3>Choose for me</h3>
+        </div>
+      </section>
     </main>
     <div id="info-modal">
       <div id="info-modal-textbox">
-        <h1 id = "info-title"></h1>
-        <img id="info-image" src="" alt="" title="">
+        <div id="info-header">
+          <h1 id = "info-title"></h1>
+          <img id="info-image" src="" alt="" title="">
+        </div>
         <dl>
           <dt>Description</dt>
           <dd id="info-description"></dd>
 
-          <!-- <dt>Number of players</dt>
-          <dd id="info-players"></dd> -->
+          <!-- <dt>Designers</dt>
+          <dd id="info-designers"></dd> -->
 
           <dt>Game Website</dt>
           <dd><a id="info-website" href="" target="_blank">Visit Official Website</a> </dd>
@@ -166,8 +169,23 @@
           <dd><a href="" id="info-rules" target="_blank">Check out the Rules</a></dd>
 
           <dt>Videos</dt>
-          <dd><iframe id="info-video" src="" width="" height=""></iframe></dd>
+          <dd id="vids-dd">
+            <!-- got these attributes from the "embed" on youtube.com -->
+            <div class="info-video-div">
+              <p></p>
+              <iframe id="info-video0" src="" width="" height="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="info-video-div">
+              <p></p>
+              <iframe id="info-video1" src="" width="" height="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="info-video-div">
+              <p></p>
+              <iframe id="info-video2" src="" width="" height="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </dd>
         </dl>
+
         <a id="info-close" href="#">Close</a>
       </div>
     </div>

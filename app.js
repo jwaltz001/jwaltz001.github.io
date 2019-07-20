@@ -48,6 +48,7 @@ const getGameInfo = (event) => {
         (data) => {
           //console.log(data);
           const selectedObj = data.games[0];
+          console.log(selectedObj);
           selectedGames.push(selectedObj);
           $("#info-game-btn"+numOfGames).attr("value", numOfGames);
           $("#title-game"+numOfGames).text(selectedObj.name);
@@ -57,8 +58,9 @@ const getGameInfo = (event) => {
           $("#players-game"+numOfGames).text("Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
           $("#playtime-game"+numOfGames).text("Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
           $("#price-game"+numOfGames).text("$" + selectedObj.msrp);
-          $("#reddit-game"+numOfGames).text(selectedObj.reddit_all_time_count + " (Since Sept. 2018)" + "  " + selectedObj.reddit_week_count + "(In the past week)");
+          $("#reddit-game"+numOfGames).text(selectedObj.reddit_all_time_count + " (Since Sept. 2018)" + "     " + selectedObj.reddit_week_count + " (In the past week)");
           $("#rating-game"+numOfGames).text(selectedObj.average_user_rating.toFixed(2));
+          $("#display-card"+numOfGames).toggle(1000);
           numOfGames++;
         },
         (error) => {
@@ -73,11 +75,14 @@ const getGameInfo = (event) => {
 const getMoreInfo = (event) => {
   const $gameArrIndex = $(event.target).val();
   $("#info-title").text(selectedGames[$gameArrIndex].name);
+  $("#info-image").attr("src", selectedGames[$gameArrIndex].images.small);
   $("#info-description").text(selectedGames[$gameArrIndex].description_preview);
   $("#info-rules").attr("href", selectedGames[$gameArrIndex].rules_url);
   $("#info-website").attr("href", selectedGames[$gameArrIndex].official_url);
   $("#info-close").on("click", () => {
     $("#info-modal").hide();
+//Figure out how to stop video on close
+//put close on info modal (background)?
   });
   getVideo();
   $("#info-modal").show();
@@ -87,13 +92,19 @@ $(".info-game-btn").on("click", getMoreInfo);
 
 const getVideo = () => {
   const $gameId = selectedGames[$(event.target).val()].id;
-  bgaUrlInsert = "https://www.boardgameatlas.com/api/game/videos?limit=5&game_id="+$gameId+"&client_id=tIPZB6stZR";
+  bgaUrlInsert = "https://www.boardgameatlas.com/api/game/videos?limit=3&game_id="+$gameId+"&youtube_id&client_id=tIPZB6stZR";
   $.ajax({
         url: bgaUrlInsert,
       }).then(
         (data) => {
           console.log(data);
-          $("#info-video").attr("src", data.videos[0].url);
+          for (var i = 0; i < data.videos.length; i++) {
+            const watchUrl = data.videos[i].url;
+            const arrWithYoutubeId = watchUrl.split("=");
+            $("#info-video"+i).attr("src", "https://www.youtube.com/embed/"+ arrWithYoutubeId[1]);
+            $(".info-video-div").children("p").eq(i).text(data.videos[i].title);
+          }
+  //could filter vids by channel or do the original call with the "include_game" parameter attached
         });
   };
 
