@@ -103,7 +103,7 @@ input {
   height: 45em;
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-end;
+  align-items: center;
   border-bottom: 3pt solid black;
   border-radius: 7pt;
 }
@@ -114,9 +114,10 @@ input {
   margin: 0 2em;
   text-align: center;
   border: 2pt solid black;
-  border-top-right-radius: 7pt;
+  border-radius: 7pt;
+  /* border-top-right-radius: 7pt;
   border-top-left-radius: 7pt;
-  border-bottom: transparent;
+  border-bottom: transparent; */
   box-shadow: 5px 0;
   display: none;
 }
@@ -139,10 +140,12 @@ dd {
   margin-right: 2em;
 }
     /* =======Lower Display======== */
+/* Should probably make all the same to scale */
 #lower-game-display {
   border-top: 3pt solid black;
   border-bottom: 3pt solid black;
   border-radius: 7pt;
+  flex-flow: row-reverse;
 }
     /* =======Random Selector======== */
 .random-selector {
@@ -163,10 +166,17 @@ dd {
   outline: 1pt solid black;
 }
 #dice-roll-img {
-  width: 95%;
+  width: 6.5em;
   height: auto;
 }
-
+.clicked-random{
+  "z-index": 1;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: scale(4);
+  transition-duration: 3s;
+  transition-timing-function: linear;
 
 /* ========================Modals===================== */
   /* =======More Info====== */

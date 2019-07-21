@@ -48,7 +48,7 @@ const getGameInfo = (event) => {
         (data) => {
           //console.log(data);
           const selectedObj = data.games[0];
-          console.log(selectedObj);
+          //console.log(selectedObj);
           selectedGames.push(selectedObj);
           $("#info-game-btn"+numOfGames).attr("value", numOfGames);
           $("#title-game"+numOfGames).text(selectedObj.name);
@@ -97,7 +97,7 @@ const getVideo = () => {
         url: bgaUrlInsert,
       }).then(
         (data) => {
-          console.log(data);
+          //console.log(data);
           for (var i = 0; i < data.videos.length; i++) {
             const watchUrl = data.videos[i].url;
             const arrWithYoutubeId = watchUrl.split("=");
@@ -107,5 +107,60 @@ const getVideo = () => {
   //could filter vids by channel or do the original call with the "include_game" parameter attached
         });
   };
+//=======================Choose for me function=========================
+const positionDiceAndView = (winner) => {
+  console.log("winner in positionDiceAndView", winner);
+  $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
+  window.scrollBy(0, -600);
+  $("#dice-roll-img").attr("class", "clicked-random");
+  setTimeout(() => {
+    $("#dice-roll-img").attr("class", "");
+  },
+  4000);
+  displayWinner(winner);
+  //$("#display-card"+winner).append("#dice-roll-img");
+  //$("#dice-roll-img").css({"z-index": 0, "position":"static", "top":"", "right":"", "transform": "scale(1)", "transition-duration": "3s"});
+  // $("#dice-roll-img").css({"z-index": 1, "position":"relative", "top":"300px", "right":"10%", "transform": "scale(2)"});
+};
+
+// const spinnerAnimation = (winner) => {
+//     const $dice = $("#dice-roll-img");
+//     let cardNumber = 0;
+//     let $card = $("#display-card" + cardNumber);
+//     let numOfMoves = 0;
+//     const moveToNextCard = () => {
+//         if (numOfMoves == winner + 11) {
+//           clearInterval(cardMovementTimer);
+//           displayWinner(winner);
+//         }else{
+//           if (cardNumber == selectedGames.length) {
+//             cardNumber = 0;
+//             $card = $("#display-card" + cardNumber).append($dice);
+//           }else{
+//             $card = $("#display-card"+ cardNumber).append($dice);
+//             cardNumber++;
+//           }
+//         numOfMoves++;
+//         }
+//       };
+//     const cardMovementTimer = setInterval(moveToNextCard, 300);
+// };
+
+const displayWinner = (winner) => {
+  console.log("Winner!", winner);
+  console.log(selectedGames[winner]);
+};
+
+
+const selectRandomGame = () => {
+  const randChoice = Math.floor(Math.random() * selectedGames.length);
+  console.log("choice", randChoice);
+  return randChoice;
+};
+
+$(".randomizer-button").on("click", () => {
+  positionDiceAndView(selectRandomGame());
+  //spinnerAnimation();
+});
 
 });
