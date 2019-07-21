@@ -51,6 +51,7 @@ const getGameInfo = (event) => {
           //console.log(selectedObj);
           selectedGames.push(selectedObj);
           $("#info-game-btn"+numOfGames).attr("value", numOfGames);
+          $("#choose-game-btn"+numOfGames).attr("value", numOfGames);
           $("#title-game"+numOfGames).text(selectedObj.name);
           $("#image-game"+numOfGames).attr("src", selectedObj.thumb_url);
           $("#year-game"+numOfGames).text(selectedObj.year_published);
@@ -90,6 +91,11 @@ const getMoreInfo = (event) => {
 };
 $(".info-game-btn").on("click", getMoreInfo);
 
+const passWinnerToDisplay = () => {
+  const winner = $(event.target).val();
+  displayWinner(winner);
+};
+$(".choose-game-btn").on("click", passWinnerToDisplay);
 const getVideo = () => {
   const $gameId = selectedGames[$(event.target).val()].id;
   bgaUrlInsert = "https://www.boardgameatlas.com/api/game/videos?limit=3&game_id="+$gameId+"&youtube_id&client_id=tIPZB6stZR";
