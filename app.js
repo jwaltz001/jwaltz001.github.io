@@ -113,10 +113,13 @@ const positionDiceAndView = (winner) => {
   $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
   window.scrollBy(0, -600);
   $("#dice-roll-img").attr("class", "clicked-random");
+
   setTimeout(() => {
+    $("#dice-roll-img").toggle(500);
     $("#dice-roll-img").attr("class", "");
+    $("#dice-roll-img").toggle(500);
   },
-  4000);
+  5000);
   displayWinner(winner);
   //$("#display-card"+winner).append("#dice-roll-img");
   //$("#dice-roll-img").css({"z-index": 0, "position":"static", "top":"", "right":"", "transform": "scale(1)", "transition-duration": "3s"});
@@ -147,8 +150,16 @@ const positionDiceAndView = (winner) => {
 // };
 
 const displayWinner = (winner) => {
-  console.log("Winner!", winner);
-  console.log(selectedGames[winner]);
+  const $winnerModal = $("<div>").attr("id","winner-modal");
+  $("body").append($winnerModal);
+  const $winnerModalTextbox = $("<div>").attr("id","winner-modal-textbox");
+  $winnerModalTextbox.append("<h2>And the winner is...");
+  $winnerModalTextbox.append("<h1>"+selectedGames[winner].name);
+  $winnerModalTextbox.append("<img src="+selectedGames[winner].images.large+">");
+  $winnerModal.append($winnerModalTextbox);
+  setTimeout(() => {
+    $winnerModal.toggle(500);
+  },5000);
 };
 
 

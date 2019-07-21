@@ -177,7 +177,8 @@ dd {
   transform: scale(4);
   transition-duration: 3s;
   transition-timing-function: linear;
-
+}
+/* animate to spin out */
 /* ========================Modals===================== */
   /* =======More Info====== */
 #info-modal {
@@ -215,5 +216,25 @@ dd {
 }
 .info-video-div p {
   margin-top: 0;
+}
+/* ================winner-modal================== */
+#winner-modal {
+  background: rgba(0, 0, 0, .4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  overflow: auto;
+  display: none;
+}
+
+#winner-modal-textbox {
+  margin: 200px auto;
+  box-shadow: 5px 0;
+  background: white;
+  width: 90%;
+  padding: 1em;
 }
 /* ========================Footer===================== */
