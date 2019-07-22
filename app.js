@@ -1,6 +1,15 @@
 //console.log($);
 $(() => {
 //===============Global Variables=======================
+
+
+//===============Objects with commonly used code=======================
+const makeDomElement = {
+  div: (elementClass,elementId) => {
+    $("<div class ='"+elementClass+"' id = '"+elementId+"'>");
+  }
+};
+
 //===============Search Div=============================
 const switchArrow = () => {
   const arrow = $("#about-tab-arrow");
@@ -61,36 +70,38 @@ const getBgaSearchResults = () => {
           console.log(error);
         }
       );
-
     };
 
     //=======Game display call=========
-let numOfGames = 0;
 let selectedGames = [];
 const getGameInfo = (event) => {
   const $gameId = $(event.target).val();
   bgaUrlInsert = "https://www.boardgameatlas.com/api/search?ids="+$gameId+"&client_id=tIPZB6stZR";
   $.ajax({
         url: bgaUrlInsert,
+        //is "type" necessary?
+        //type: "GET"
       }).then(
         (data) => {
-          //console.log(data);
+          console.log(data);
           const selectedObj = data.games[0];
-          //console.log(selectedObj);
+          console.log(selectedObj);
           selectedGames.push(selectedObj);
-          $("#info-game-btn"+numOfGames).attr("value", numOfGames);
-          $("#choose-game-btn"+numOfGames).attr("value", numOfGames);
-          $("#title-game"+numOfGames).text(selectedObj.name);
-          $("#image-game"+numOfGames).attr("src", selectedObj.thumb_url);
-          $("#year-game"+numOfGames).text(selectedObj.year_published);
+          const selectedGameIndex = selectedGames.length-1;
+          console.log(selectedGameIndex);
+          $("#info-game-btn"+selectedGameIndex).attr("value", selectedGameIndex);
+          $("#choose-game-btn"+selectedGameIndex).attr("value", selectedGameIndex);
+          $("#title-game"+selectedGameIndex).text(selectedObj.name);
+          $("#image-game"+selectedGameIndex).attr("src", selectedObj.thumb_url);
+          $("#year-game"+selectedGameIndex).text(selectedObj.year_published);
 //good place for string interpolation?
-          $("#players-game"+numOfGames).text("Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
-          $("#playtime-game"+numOfGames).text("Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
-          $("#price-game"+numOfGames).text("$" + selectedObj.msrp);
-          $("#reddit-game"+numOfGames).text(selectedObj.reddit_all_time_count + " (Since Sept. 2018)" + "     " + selectedObj.reddit_week_count + " (In the past week)");
-          $("#rating-game"+numOfGames).text(selectedObj.average_user_rating.toFixed(2));
-          $("#display-card"+numOfGames).toggle(1000);
-          numOfGames++;
+          $("#players-game"+selectedGameIndex).text("Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
+          $("#playtime-game"+selectedGameIndex).text("Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
+          $("#price-game"+selectedGameIndex).text("$" + selectedObj.msrp);
+          $("#reddit-game"+selectedGameIndex).text(selectedObj.reddit_all_time_count + " (Since Sept. 2018) || " + selectedObj.reddit_week_count + " (In the past week)");
+          $("#rating-game"+selectedGameIndex).text(selectedObj.average_user_rating.toFixed(2));
+          console.log($("#display-card"+selectedGameIndex));
+          $("#display-card"+selectedGameIndex).toggle(1000);
         },
         (error) => {
           console.log(error);
@@ -103,18 +114,23 @@ const getGameInfo = (event) => {
     //=======More info call=========
 const getMoreInfo = (event) => {
   const $gameArrIndex = $(event.target).val();
+  $("#display-card"+$gameArrIndex).toggle();
+  const $infoModal = $("#info-modal-textbox");
+  console.log($infoModal);
+  $(".display-card-container").append($infoModal);
   $("#info-title").text(selectedGames[$gameArrIndex].name);
   $("#info-image").attr("src", selectedGames[$gameArrIndex].images.small);
   $("#info-description").text(selectedGames[$gameArrIndex].description_preview);
   $("#info-rules").attr("href", selectedGames[$gameArrIndex].rules_url);
   $("#info-website").attr("href", selectedGames[$gameArrIndex].official_url);
   $("#info-close").on("click", () => {
-    $("#info-modal").hide();
+    $("#info-modal-textbox").toggle();
+    $("#display-card"+$gameArrIndex).toggle();
 //Figure out how to stop video on close
 //put close on info modal (background)?
   });
   getVideo();
-  $("#info-modal").show();
+  $("#info-modal-textbox").toggle();
   //**************** insert game videos***************
 };
 $(".info-game-btn").on("click", getMoreInfo);
@@ -155,33 +171,7 @@ const positionDiceAndView = (winner) => {
     displayWinner(winner);
   },
   5000);
-  //$("#display-card"+winner).append("#dice-roll-img");
-  //$("#dice-roll-img").css({"z-index": 0, "position":"static", "top":"", "right":"", "transform": "scale(1)", "transition-duration": "3s"});
-  // $("#dice-roll-img").css({"z-index": 1, "position":"relative", "top":"300px", "right":"10%", "transform": "scale(2)"});
 };
-
-// const spinnerAnimation = (winner) => {
-//     const $dice = $("#dice-roll-img");
-//     let cardNumber = 0;
-//     let $card = $("#display-card" + cardNumber);
-//     let numOfMoves = 0;
-//     const moveToNextCard = () => {
-//         if (numOfMoves == winner + 11) {
-//           clearInterval(cardMovementTimer);
-//           displayWinner(winner);
-//         }else{
-//           if (cardNumber == selectedGames.length) {
-//             cardNumber = 0;
-//             $card = $("#display-card" + cardNumber).append($dice);
-//           }else{
-//             $card = $("#display-card"+ cardNumber).append($dice);
-//             cardNumber++;
-//           }
-//         numOfMoves++;
-//         }
-//       };
-//     const cardMovementTimer = setInterval(moveToNextCard, 300);
-// };
 
 const displayWinner = (winner) => {
   const $winnerModal = $("<div>").attr("id","winner-modal");
@@ -190,16 +180,18 @@ const displayWinner = (winner) => {
   $winnerModalTextbox.append("<h2>And the winner is...");
   $winnerModalTextbox.append("<h1>"+selectedGames[winner].name);
   $winnerModalTextbox.append("<img src="+selectedGames[winner].images.large+">");
+  const $winnerDl = $("<dl>");
+  $winnerModalTextbox.append($winnerDl);
+  $winnerDl.append("<dt id='winner-designers'>Designed by</dt>");
+  $winnerDl.append("<dd>" + selectedGames[winner].designers + "</dd>");
   const $closeBtn = $("<button id='winner-modal-close'>Close</button>");
   $closeBtn.on("click", () => {
-    console.log("click");
+    //console.log("click");
     $("#winner-modal").hide(500);
   });
   $winnerModalTextbox.append($closeBtn);
   $winnerModal.append($winnerModalTextbox);
-
-    $winnerModal.toggle(500);
-  //setTimeout(() => {},5000);
+  $winnerModal.toggle(500);
 };
 
 
@@ -211,7 +203,49 @@ const selectRandomGame = () => {
 
 $(".randomizer-button").on("click", () => {
   positionDiceAndView(selectRandomGame());
-  //spinnerAnimation();
 });
 
 });
+
+const oldAttemptAtRandomizer = {
+  // const positionDiceAndView = (winner) => {
+  //   console.log("winner in positionDiceAndView", winner);
+  //   $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
+  //   window.scrollBy(0, -600);
+  //   $("#dice-roll-img").attr("class", "clicked-random");
+  //
+  //   setTimeout(() => {
+  //     $("#dice-roll-img").toggle(500);
+  //     $("#dice-roll-img").attr("class", "");
+  //     $("#dice-roll-img").toggle(500);
+  //     displayWinner(winner);
+  //   },
+  //   5000);
+    //$("#display-card"+winner).append("#dice-roll-img");
+    //$("#dice-roll-img").css({"z-index": 0, "position":"static", "top":"", "right":"", "transform": "scale(1)", "transition-duration": "3s"});
+    // $("#dice-roll-img").css({"z-index": 1, "position":"relative", "top":"300px", "right":"10%", "transform": "scale(2)"});
+  // };
+
+  // const spinnerAnimation = (winner) => {
+  //     const $dice = $("#dice-roll-img");
+  //     let cardNumber = 0;
+  //     let $card = $("#display-card" + cardNumber);
+  //     let numOfMoves = 0;
+  //     const moveToNextCard = () => {
+  //         if (numOfMoves == winner + 11) {
+  //           clearInterval(cardMovementTimer);
+  //           displayWinner(winner);
+  //         }else{
+  //           if (cardNumber == selectedGames.length) {
+  //             cardNumber = 0;
+  //             $card = $("#display-card" + cardNumber).append($dice);
+  //           }else{
+  //             $card = $("#display-card"+ cardNumber).append($dice);
+  //             cardNumber++;
+  //           }
+  //         numOfMoves++;
+  //         }
+  //       };
+  //     const cardMovementTimer = setInterval(moveToNextCard, 300);
+  // };
+};

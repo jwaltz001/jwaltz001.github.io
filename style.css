@@ -138,8 +138,12 @@ input {
   border-radius: 7pt;
 }
 
+.display-card-container {
+  width: 80%;
+}
+
 .display-cards {
-  width: 48%;
+  width: 100%;
   height: 40em;
   margin: 2em;
   text-align: center;

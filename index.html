@@ -2,13 +2,16 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+<!-- SCRIPTS -->
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
   <script src="app.js" charset="utf-8"></script>
+<!-- STYLES -->
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900|Darker+Grotesque:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <title>D&P</title>
   </head>
   <body>
@@ -41,6 +44,7 @@
         </div>
       </section>
       <section class="game-displays" id="upper-game-display">
+        <div class="display-card-container" id="">
         <div class="display-cards" id="display-card0">
           <h1 id="title-game0"></h1>
           <img id="image-game0" src="" alt="" title="">
@@ -65,6 +69,7 @@
           </dl>
           <button type="button" class="choose-game-btn" id="choose-game-btn0">Choose</button>
           <button type="button" class="info-game-btn" id="info-game-btn0">More Info</button>
+        </div>
         </div>
         <div class="display-cards" id="display-card1">
             <h1 id="title-game1"></h1>
@@ -155,8 +160,8 @@
       </section>
     </main>
 
-    <!-- <div id="info-modal">
-      <div id="info-modal-textbox">
+    <div id="info-modal">
+      <div class = "display-cards" id="info-modal-textbox">
         <div id="info-header">
           <h1 id = "info-title"></h1>
           <img id="info-image" src="" alt="" title="">
@@ -173,7 +178,6 @@
 
           <dt>Videos</dt>
           <dd id="vids-dd">
-            <!-- got these attributes from the "embed" on youtube.com -->
             <div class="info-video-div">
               <p></p>
               <iframe id="info-video0" src="" width="" height="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -188,8 +192,7 @@
             </div>
           </dd>
         </dl>
-
-        <a id="info-close" href="#">Close</a>
+        <button id="info-close">Close</button>
       </div>
     </div> -->
     <footer>
