@@ -1,9 +1,8 @@
-//console.log($);
 $(() => {
 //===============Global Variables=======================
     //===========API URL Variables================
 let bgaUrlInsert = "";
-
+let selectedGames = [];
 //===============Objects with commonly used code=======================
 //good place for constructor?
 const makeDomElement = {
@@ -29,6 +28,7 @@ const makeDomElement = {
     $(parentElement).append("<dd>"+elementText+"</dd>");
   }
 };
+
 //===============Search Div=============================
 const switchArrow = () => {
   const arrow = $("#about-tab-arrow");
@@ -43,18 +43,6 @@ const switchArrow = () => {
     arrow.removeClass("upside-down-arrow");
   }
 };
-
-$(".arrow-down-btn").on("click", switchArrow);
-
-
-$(".search-form").on("submit", (event) => {
-    event.preventDefault();
-    $(".results-display").empty();
-    const searchTerms = $("#search-input").val();
-    bgaUrlInsert = "https://www.boardgameatlas.com/api/search?name="+searchTerms+"&limit=10&client_id=tIPZB6stZR";
-    getBgaSearchResults();
-  });
-
 
 //===============API Call Functions=============================
     //=======Search Call=========
@@ -74,10 +62,9 @@ const getBgaSearchResults = () => {
           console.log(error);
         }
       );
-    };
+};
 
     //=======Game display call=========
-let selectedGames = [];
 const getGameInfo = (event) => {
   const $gameId = $(event.target).val();
   bgaUrlInsert = "https://www.boardgameatlas.com/api/search?ids="+$gameId+"&client_id=tIPZB6stZR";
@@ -170,13 +157,11 @@ const closeMoreInfo = (event) => {
 //Figure out how to stop video on close
 //put close on info modal (background)?
 
-
 //=======================Choose Winner functions=========================
 const passWinnerToDisplay = () => {
   const winner = $(event.target).val();
   displayWinner(winner);
 };
-
 const displayWinner = (winner) => {
   const $winnerModal = $("<div>").attr("id","winner-modal");
   $("body").append($winnerModal);
@@ -191,7 +176,8 @@ const displayWinner = (winner) => {
   $winnerDl.append("<dd>" + selectedGames[winner].designers + "</dd>");
   const $closeBtn = $("<button id='winner-modal-close'>Close</button>");
   $closeBtn.on("click", () => {
-    $("#winner-modal").hide(500);
+    $("#winner-modal").toggle(500);
+    $(".game-display-area").css({"transform": "scale(1)", "transition-duration": "3s"});
   });
   $winnerModalTextbox.append($closeBtn);
   $winnerModal.append($winnerModalTextbox);
@@ -200,70 +186,30 @@ const displayWinner = (winner) => {
 //=======================Choose for me function=========================
 const selectRandomGame = () => {
   const randChoice = Math.floor(Math.random() * selectedGames.length);
-  console.log("choice", randChoice);
   return randChoice;
 };
-
 const positionDiceAndView = (winner) => {
-  console.log("winner in positionDiceAndView", winner);
-  $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
-  window.scrollBy(0, -600);
+  $(".game-display-area").css({"transform": "scale(.8)", "transition-duration": "3s"});
+  window.scrollBy(0, -300);
   $("#dice-roll-img").attr("class", "clicked-random");
-
   setTimeout(() => {
-    $("#dice-roll-img").toggle(500);
     $("#dice-roll-img").attr("class", "");
-    $("#dice-roll-img").toggle(500);
     displayWinner(winner);
   },
   5000);
 };
 
+//=======================Starting Event Listeners=========================
 $(".randomizer-button").on("click", () => {
   positionDiceAndView(selectRandomGame());
 });
+$(".arrow-down-btn").on("click", switchArrow);
+$(".search-form").on("submit", (event) => {
+    event.preventDefault();
+    $(".results-display").empty();
+    const searchTerms = $("#search-input").val();
+    bgaUrlInsert = "https://www.boardgameatlas.com/api/search?name="+searchTerms+"&limit=10&client_id=tIPZB6stZR";
+    getBgaSearchResults();
+  });
 
 });
-
-const oldAttemptAtRandomizer = {
-  // const positionDiceAndView = (winner) => {
-  //   console.log("winner in positionDiceAndView", winner);
-  //   $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
-  //   window.scrollBy(0, -600);
-  //   $("#dice-roll-img").attr("class", "clicked-random");
-  //
-  //   setTimeout(() => {
-  //     $("#dice-roll-img").toggle(500);
-  //     $("#dice-roll-img").attr("class", "");
-  //     $("#dice-roll-img").toggle(500);
-  //     displayWinner(winner);
-  //   },
-  //   5000);
-    //$("#display-card"+winner).append("#dice-roll-img");
-    //$("#dice-roll-img").css({"z-index": 0, "position":"static", "top":"", "right":"", "transform": "scale(1)", "transition-duration": "3s"});
-    // $("#dice-roll-img").css({"z-index": 1, "position":"relative", "top":"300px", "right":"10%", "transform": "scale(2)"});
-  // };
-
-  // const spinnerAnimation = (winner) => {
-  //     const $dice = $("#dice-roll-img");
-  //     let cardNumber = 0;
-  //     let $card = $("#display-card" + cardNumber);
-  //     let numOfMoves = 0;
-  //     const moveToNextCard = () => {
-  //         if (numOfMoves == winner + 11) {
-  //           clearInterval(cardMovementTimer);
-  //           displayWinner(winner);
-  //         }else{
-  //           if (cardNumber == selectedGames.length) {
-  //             cardNumber = 0;
-  //             $card = $("#display-card" + cardNumber).append($dice);
-  //           }else{
-  //             $card = $("#display-card"+ cardNumber).append($dice);
-  //             cardNumber++;
-  //           }
-  //         numOfMoves++;
-  //         }
-  //       };
-  //     const cardMovementTimer = setInterval(moveToNextCard, 300);
-  // };
-};

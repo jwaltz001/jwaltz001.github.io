@@ -3,6 +3,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Cinzel', serif;
+  background: lightgrey;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button:hover {
+  background: black;
+  color: white;
 }
 /* ========================Header===================== */
 header {
@@ -107,17 +116,13 @@ input {
   background: transparent;
   padding: .25em;
 }
-#search-btn:hover {
-  background: black;
-  color: white;
-}
 .results-display button {
   border: 1pt solid grey;
   padding: .25em;
   margin: .25em;
-  font-size: 12pt;
+  font-size: 14pt;
 }
-.results-display button:hover {
+#search-btn:hover {
   background: black;
   color: white;
 }
@@ -127,22 +132,21 @@ input {
   width: 98%;
   min-height: 400px;
   height: auto;
+  background: firebrick;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 7pt;
-  border-top: 3pt solid black;
-  border-bottom: 3pt solid black;
+  border-top: 5pt solid black;
+  border-bottom: 5pt solid black;
 }
-
 .display-card-container {
   width: 90%;
-  height:auto;
+  height: auto;
   display: none;
   margin: 2em 1em;
 }
-
 .display-cards {
   width: 100%;
   height: 40em;
@@ -150,6 +154,7 @@ input {
   border: 2pt solid black;
   border-radius: 7pt;
   box-shadow: 5px 0;
+  background: white;
 }
 .display-cards > img {
   width: auto;
@@ -163,7 +168,12 @@ dd {
   font-family: 'Darker Grotesque', sans-serif;
   font-size: 15pt;
 }
-/* Come back and change to a "read more" button that expands and retracts the game description or display short desc. from API and then full desc. with modal */
+.display-cards button {
+  border: 1pt solid grey;
+  padding: .25em;
+  margin: .25em;
+  font-size: 14pt;
+}
 .game-descriptions {
   height: 5em;
   overflow-y: scroll;
@@ -177,28 +187,31 @@ dd {
   justify-content: center;
   align-items: center;
   text-align: center;
-
 }
 .randomizer-button {
   width: 7em;
   padding: .5em;
 }
 .randomizer-button:hover {
-  outline: 1pt solid black;
+  outline: 2pt solid black;
+  background: white;
+  transition: background .5s;
 }
 #dice-roll-img {
   width: 6.5em;
   height: auto;
 }
-.clicked-random{
-  "z-index": 1;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: scale(4);
-  transition-duration: 3s;
-  transition-timing-function: linear;
+.clicked-random {
+  animation-name: dice-animation;
+  animation-duration: 5s;
+  animation-timing-function: linear;
 }
+@keyframes dice-animation{
+  0% {transform: scale(1);}
+  50% {transform: translate(0, -300px) scale(3) rotate(800deg);}
+  100% {transform: translate(0, -600px) scale(4) rotate(1600deg);}
+}
+
 /* animate to spin out */
 /* ========================Modals===================== */
   /* =======More Info====== */
@@ -250,21 +263,31 @@ info-video-div iframe{
   overflow: auto;
   display: none;
 }
-
 #winner-modal-textbox {
   margin: 200px auto;
   box-shadow: 5px 0;
   background: white;
   width: 90%;
   padding: 1em;
+  border-radius: 7pt;
 }
 /* ========================Footer===================== */
 footer {
   border-top: 1pt solid grey;
+  background: white;
+  height: auto;
+}
+footer h5 {
+  margin: 0 auto;
+  padding: 2em;
+  width: 20%;
+}
+footer a:hover{
+  text-decoration: underline;
 }
 /* media break point */
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   .display-card-container {
     width: 46%;
  }
