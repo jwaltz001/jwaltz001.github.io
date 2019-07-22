@@ -54,7 +54,6 @@ main {
   display: flex;
   flex-flow: column;
   align-items: center;
-  border-bottom: 1pt solid grey;
 }
 .about-tab {
   display: flex;
@@ -66,7 +65,10 @@ main {
 }
 .about-tab p {
   display: none;
-  background: lightgrey;
+  /* background: lightgrey; */
+  /* width: 150%; */
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
 }
 
 /* used how to on w3schools for arrow https://www.w3schools.com/howto/howto_css_arrows.asp */
@@ -129,22 +131,22 @@ input {
     /* =======Both Displays======== */
 .game-displays {
   width: 95%;
-  height: 45em;
+  min-height: 200px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-bottom: 3pt solid black;
   border-radius: 7pt;
 }
-/* fix space between shadow and bottom border */
+
 .display-cards {
   width: 48%;
   height: 40em;
-  margin: 0 2em;
+  margin: 2em;
   text-align: center;
   border: 2pt solid black;
   border-radius: 7pt;
-  /* border-top-right-radius: 7pt;
+  /*for having the cards attached to bottom border:
+  border-top-right-radius: 7pt;
   border-top-left-radius: 7pt;
   border-bottom: transparent; */
   box-shadow: 5px 0;
@@ -170,10 +172,13 @@ dd {
 }
     /* =======Lower Display======== */
 /* Should probably make all the same to scale */
-#lower-game-display {
+#upper-game-display {
   border-top: 3pt solid black;
+}
+
+#lower-game-display {
+  /* border-top: 3pt solid black; */
   border-bottom: 3pt solid black;
-  border-radius: 7pt;
   flex-flow: row-reverse;
 }
     /* =======Random Selector======== */
@@ -267,3 +272,6 @@ dd {
   padding: 1em;
 }
 /* ========================Footer===================== */
+footer {
+  border-top: 1pt solid grey;
+}
