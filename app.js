@@ -1,15 +1,34 @@
 //console.log($);
 $(() => {
 //===============Global Variables=======================
-
+    //===========API URL Variables================
+let bgaUrlInsert = "";
 
 //===============Objects with commonly used code=======================
+//good place for constructor?
 const makeDomElement = {
-  div: (elementClass,elementId) => {
-    $("<div class ='"+elementClass+"' id = '"+elementId+"'>");
+  makeDiv: (parentElement, elementClass, elementId) => {
+    $(parentElement).append("<div class ="+elementClass+" id = "+elementId+">");
+  },
+  makeH1: (parentElement, elementClass, elementId, elementText) => {
+    $(parentElement).append("<h1 class ="+elementClass+" id = "+elementId+">"+elementText+"</h1>");
+  },
+  makeBtn: (parentElement, elementClass, elementId, elementValue, elementText) => {
+    $(parentElement).append("<button class ="+elementClass+" id = "+elementId+" value = "+elementValue+">"+elementText+"</button>");
+  },
+  makeImg: (parentElement, elementSrc , elementId) => {
+    $(parentElement).append("<img src ="+elementSrc+" id = "+elementId+">");
+  },
+  makeDl: (parentElement, elementClass, elementId) => {
+    $(parentElement).append("<dl class ="+elementClass+" id = "+elementId+">");
+  },
+  makeDt: (parentElement, elementText) => {
+    $(parentElement).append("<dt>"+elementText+"</dt>");
+  },
+  makeDd: (parentElement, elementText) => {
+    $(parentElement).append("<dd>"+elementText+"</dd>");
   }
 };
-
 //===============Search Div=============================
 const switchArrow = () => {
   const arrow = $("#about-tab-arrow");
@@ -27,16 +46,6 @@ const switchArrow = () => {
 
 };
 
-// $("#about-text").slideDown("slow");
-// $(".down-arrow").attr("class","upside-down-arrow");
-// $(".arrow-down-btn").on("click", slideAboutUp);
-//
-// const slideAboutUp = () => {
-//     $("#about-text").slideUp("slow");
-//     $(".upside-down-arrow").attr("class","down-arrow");
-//     //$(".arrow-down-btn").on("click",slideAboutDown);
-//   };
-
 $(".arrow-down-btn").on("click", switchArrow);
 
 
@@ -48,10 +57,7 @@ $(".search-form").on("submit", (event) => {
     getBgaSearchResults();
   });
 
-//================API URL Variables=============================
-let bgaUrlInsert = "";
-//let resultsObj = {};
-//let data1 = {};
+
 //===============API Call Functions=============================
     //=======Search Call=========
 const getBgaSearchResults = () => {
@@ -83,31 +89,37 @@ const getGameInfo = (event) => {
         //type: "GET"
       }).then(
         (data) => {
-          console.log(data);
           const selectedObj = data.games[0];
-          console.log(selectedObj);
+          //console.log(selectedObj);
           selectedGames.push(selectedObj);
           const selectedGameIndex = selectedGames.length-1;
-          console.log(selectedGameIndex);
-          $("#info-game-btn"+selectedGameIndex).attr("value", selectedGameIndex);
-          $("#choose-game-btn"+selectedGameIndex).attr("value", selectedGameIndex);
-          $("#title-game"+selectedGameIndex).text(selectedObj.name);
-          $("#image-game"+selectedGameIndex).attr("src", selectedObj.thumb_url);
-          $("#year-game"+selectedGameIndex).text(selectedObj.year_published);
-//good place for string interpolation?
-          $("#players-game"+selectedGameIndex).text("Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
-          $("#playtime-game"+selectedGameIndex).text("Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
-          $("#price-game"+selectedGameIndex).text("$" + selectedObj.msrp);
-          $("#reddit-game"+selectedGameIndex).text(selectedObj.reddit_all_time_count + " (Since Sept. 2018) || " + selectedObj.reddit_week_count + " (In the past week)");
-          $("#rating-game"+selectedGameIndex).text(selectedObj.average_user_rating.toFixed(2));
-          console.log($("#display-card"+selectedGameIndex));
-          $("#display-card"+selectedGameIndex).toggle(1000);
+          makeDomElement.makeDiv(".game-display-area","display-card-container","card-container" + selectedGameIndex);
+          makeDomElement.makeDiv("#card-container" + selectedGameIndex,"display-cards","display-card" + selectedGameIndex);
+          const idForCard = "#display-card" + selectedGameIndex;
+          makeDomElement.makeH1(idForCard,"card_h1","title-game" + selectedGameIndex, selectedObj.name);
+          makeDomElement.makeImg(idForCard, selectedObj.thumb_url, "image-game"+ selectedGameIndex);
+          makeDomElement.makeDl(idForCard, "game_card_dl", "game_card_dl"+ selectedGameIndex);
+          const idForList = "#game_card_dl"+ selectedGameIndex;
+          makeDomElement.makeDt(idForList, "Year Published");
+          makeDomElement.makeDd(idForList, selectedObj.year_published);
+          makeDomElement.makeDt(idForList, "Number of players");
+          makeDomElement.makeDd(idForList, "Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
+          makeDomElement.makeDt(idForList, "Playtime (in minutes)");
+          makeDomElement.makeDd(idForList, "Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
+          makeDomElement.makeDt(idForList, "Price (MSRP)");
+          makeDomElement.makeDd(idForList, "$" + selectedObj.msrp);
+          makeDomElement.makeDt(idForList, "Number of Mentions on /r/boardgames");
+          makeDomElement.makeDd(idForList, selectedObj.reddit_all_time_count + " (Since Sept. 2018) || " + selectedObj.reddit_week_count + " (In the past week)");
+          makeDomElement.makeDt(idForList, "Average Rating on Board Game Atlas");
+          makeDomElement.makeDd(idForList, selectedObj.average_user_rating.toFixed(2));
+          makeDomElement.makeBtn(idForCard, "choose-game-btn", "choose-game-btn"+selectedGameIndex, selectedGameIndex, "Choose");
+          makeDomElement.makeBtn(idForCard, "info-game-btn", "info-game-btn"+selectedGameIndex, selectedGameIndex, "More Info");
+          $("#card-container"+selectedGameIndex).toggle(800);
         },
         (error) => {
           console.log(error);
         }
       );
-
 };
 
 
@@ -135,11 +147,6 @@ const getMoreInfo = (event) => {
 };
 $(".info-game-btn").on("click", getMoreInfo);
 
-const passWinnerToDisplay = () => {
-  const winner = $(event.target).val();
-  displayWinner(winner);
-};
-$(".choose-game-btn").on("click", passWinnerToDisplay);
 const getVideo = () => {
   const $gameId = selectedGames[$(event.target).val()].id;
   bgaUrlInsert = "https://www.boardgameatlas.com/api/game/videos?limit=3&game_id="+$gameId+"&youtube_id&client_id=tIPZB6stZR";
@@ -157,21 +164,13 @@ const getVideo = () => {
   //could filter vids by channel or do the original call with the "include_game" parameter attached
         });
   };
-//=======================Choose for me function=========================
-const positionDiceAndView = (winner) => {
-  console.log("winner in positionDiceAndView", winner);
-  $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
-  window.scrollBy(0, -600);
-  $("#dice-roll-img").attr("class", "clicked-random");
-
-  setTimeout(() => {
-    $("#dice-roll-img").toggle(500);
-    $("#dice-roll-img").attr("class", "");
-    $("#dice-roll-img").toggle(500);
-    displayWinner(winner);
-  },
-  5000);
+//=======================Choose Winner functions=========================
+const passWinnerToDisplay = () => {
+  const winner = $(event.target).val();
+  displayWinner(winner);
 };
+
+$(".choose-game-btn").on("click", passWinnerToDisplay);
 
 const displayWinner = (winner) => {
   const $winnerModal = $("<div>").attr("id","winner-modal");
@@ -193,12 +192,26 @@ const displayWinner = (winner) => {
   $winnerModal.append($winnerModalTextbox);
   $winnerModal.toggle(500);
 };
-
-
+//=======================Choose for me function=========================
 const selectRandomGame = () => {
   const randChoice = Math.floor(Math.random() * selectedGames.length);
   console.log("choice", randChoice);
   return randChoice;
+};
+
+const positionDiceAndView = (winner) => {
+  console.log("winner in positionDiceAndView", winner);
+  $("main").css({"transform": "scale(.6)", "transition-duration": "3s"});
+  window.scrollBy(0, -600);
+  $("#dice-roll-img").attr("class", "clicked-random");
+
+  setTimeout(() => {
+    $("#dice-roll-img").toggle(500);
+    $("#dice-roll-img").attr("class", "");
+    $("#dice-roll-img").toggle(500);
+    displayWinner(winner);
+  },
+  5000);
 };
 
 $(".randomizer-button").on("click", () => {
