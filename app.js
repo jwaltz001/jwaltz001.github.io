@@ -111,8 +111,8 @@ const getGameInfo = (event) => {
           makeDomElement.makeDt(idForList, "Average Rating on Board Game Atlas");
           makeDomElement.makeDd(idForList, selectedObj.average_user_rating.toFixed(2));
           makeDomElement.makeBtn(idForCard, "choose-game-btn", "choose-game-btn"+selectedGameIndex, selectedGameIndex, "Choose");
-          makeDomElement.makeBtn(idForCard, "info-game-btn", "info-game-btn"+selectedGameIndex, selectedGameIndex, "More Info");
-          $("#card-container"+selectedGameIndex).toggle(800);
+          makeDomElement.makeBtn(idForCard, "info-game-btn", "info-game-btn"+selectedGameIndex, selectedGameIndex, "<a href = '#more-info-display'>More Info</a>");
+          $("#card-container"+selectedGameIndex).toggle("slow", "linear");
           $(".choose-game-btn").on("click", passWinnerToDisplay);
           $(".info-game-btn").on("click", getMoreInfo);
         },
@@ -124,29 +124,25 @@ const getGameInfo = (event) => {
 
     //=======More info call=========
 const getMoreInfo = (event) => {
-  const $gameArrIndex = $(event.target).val();
-  $("#display-card"+$gameArrIndex).toggle();
+  console.log("clicked");
+  const $gameArrIndex = $(event.currentTarget).val();
+  console.log($gameArrIndex);
   const $infoModal = $("#info-modal-textbox");
-  $("#card-container"+$gameArrIndex).append($infoModal);
+  $("#more-info-display").append($infoModal);
   $("#info-title").text(selectedGames[$gameArrIndex].name);
   $("#info-image").attr("src", selectedGames[$gameArrIndex].images.small);
   $("#info-description").text(selectedGames[$gameArrIndex].description_preview);
   $("#info-rules").attr("href", selectedGames[$gameArrIndex].rules_url);
   $("#info-website").attr("href", selectedGames[$gameArrIndex].official_url);
-  $("#info-close").on("click", () => {
-    $("#info-modal-textbox").toggle();
-    $("#display-card"+$gameArrIndex).toggle();
-//Figure out how to stop video on close
-//put close on info modal (background)?
-  });
-  getVideo();
+  $("#info-close").attr("value", $gameArrIndex);
+  $("#info-close").on("click", closeMoreInfo);
+  getVideo($gameArrIndex);
   $($infoModal).css("display","block");
   //**************** insert game videos***************
 };
 
-
-const getVideo = () => {
-  const $gameId = selectedGames[$(event.target).val()].id;
+const getVideo = ($gameArrIndex) => {
+  const $gameId = selectedGames[$gameArrIndex].id;
   bgaUrlInsert = "https://www.boardgameatlas.com/api/game/videos?limit=3&game_id="+$gameId+"&youtube_id&client_id=tIPZB6stZR";
   $.ajax({
         url: bgaUrlInsert,
@@ -162,6 +158,19 @@ const getVideo = () => {
   //could filter vids by channel or do the original call with the "include_game" parameter attached
         });
   };
+
+const closeMoreInfo = (event) => {
+  const $gameArrIndex = $(event.target).val();
+  $("#info-modal-textbox").css("display","none");
+  $("#info-image").attr("src","");
+  $("#info-website").attr("href","");
+  $("#info-rules").attr("href","");
+  $("iframe").attr("src","");
+};
+//Figure out how to stop video on close
+//put close on info modal (background)?
+
+
 //=======================Choose Winner functions=========================
 const passWinnerToDisplay = () => {
   const winner = $(event.target).val();

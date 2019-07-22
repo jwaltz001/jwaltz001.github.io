@@ -94,12 +94,10 @@ main {
   50% {transform: scale(1.15);}
   100% {transform: scale(1);}
 }
-
 .upside-down-arrow {
   transform: rotate(225deg);
   transition-duration: 1s;
 }
-
 .search-bar {
   margin: 1em 0;
 }
@@ -130,16 +128,20 @@ input {
   /* ==============Games to compare/Display===============*/
 .game-display-area {
   width: 98%;
-  min-height: 200px;
+  min-height: 400px;
+  height: auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 7pt;
+  border-top: 3pt solid black;
+  border-bottom: 3pt solid black;
 }
 
 .display-card-container {
-  width: 45%;
+  width: 46%;
+  height:auto;
   display: none;
   margin: 2em 1em;
 }
@@ -150,10 +152,6 @@ input {
   text-align: center;
   border: 2pt solid black;
   border-radius: 7pt;
-  /*for having the cards attached to bottom border:
-  border-top-right-radius: 7pt;
-  border-top-left-radius: 7pt;
-  border-bottom: transparent; */
   box-shadow: 5px 0;
 }
 .display-cards > img {
@@ -174,17 +172,6 @@ dd {
   overflow-y: scroll;
   margin-right: 2em;
 }
-    /* =======Lower Display======== */
-/* Should probably make all the same to scale */
-#upper-game-display {
-  border-top: 3pt solid black;
-}
-
-/* #lower-game-display {
-  /* border-top: 3pt solid black; */
-  border-bottom: 3pt solid black;
-  flex-flow: row-reverse;
-} */
     /* =======Random Selector======== */
 .random-selector {
   margin-bottom: 2em;
@@ -198,7 +185,6 @@ dd {
 .randomizer-button {
   width: 7em;
   padding: .5em;
-
 }
 .randomizer-button:hover {
   outline: 1pt solid black;
@@ -219,31 +205,28 @@ dd {
 /* animate to spin out */
 /* ========================Modals===================== */
   /* =======More Info====== */
-#info-modal {
-  background: rgba(0, 0, 0, .4);
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  overflow: auto;
-  display: none;
+#more-info-display {
+  transition: height 3s;
 }
 #info-modal-textbox {
-  margin: 200px auto;
   box-shadow: 5px 0;
   background: white;
   width: 90%;
   padding: 1em;
+  height: auto;
+  display: none;
 }
 #info-header{
   display: flex;
   justify-content: center;
   align-items: center;
 }
+#info-header h1 {
+  margin-right: 2em;
+}
 #vids-dd {
   display: flex;
+  flex-flow: wrap;
   align-items: flex-end;
 }
 .info-video-div {
@@ -254,6 +237,9 @@ dd {
 }
 .info-video-div p {
   margin-top: 0;
+}
+info-video-div iframe{
+  width: 100%
 }
 /* ================winner-modal================== */
 #winner-modal {
