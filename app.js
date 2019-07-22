@@ -91,7 +91,7 @@ const getGameInfo = (event) => {
           //console.log(selectedObj);
           selectedGames.push(selectedObj);
           const selectedGameIndex = selectedGames.length-1;
-          makeDomElement.makeDiv(".game-display-area","display-card-container","card-container" + selectedGameIndex);
+          const $newCardContainer = $(".game-display-area").prepend("<div class = 'display-card-container' id = 'card-container" + selectedGameIndex+"'</div>");
           makeDomElement.makeDiv("#card-container" + selectedGameIndex,"display-cards","display-card" + selectedGameIndex);
           const idForCard = "#display-card" + selectedGameIndex;
           makeDomElement.makeH1(idForCard,"card_h1","title-game" + selectedGameIndex, selectedObj.name);

@@ -80,9 +80,6 @@ main {
   transform: rotate(45deg);
   transition-duration: 1s;
 }
-/* .arrow-down-btn{
-  width: 10px;
-} */
 .arrow-down-btn:hover {
   animation-name: arrow-pulse;
   animation-duration: 1s;
@@ -140,7 +137,7 @@ input {
 }
 
 .display-card-container {
-  width: 46%;
+  width: 90%;
   height:auto;
   display: none;
   margin: 2em 1em;
@@ -265,3 +262,9 @@ info-video-div iframe{
 footer {
   border-top: 1pt solid grey;
 }
+/* media break point */
+
+@media (min-width: 500px) {
+  .display-card-container {
+    width: 46%;
+ }
