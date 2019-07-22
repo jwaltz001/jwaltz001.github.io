@@ -2,6 +2,34 @@
 $(() => {
 //===============Global Variables=======================
 //===============Search Div=============================
+const switchArrow = () => {
+  const arrow = $("#about-tab-arrow");
+  console.log(arrow);
+  const arrowClass = $("#about-tab-arrow").hasClass("upside-down-arrow");
+  console.log(arrowClass);
+  if (arrowClass == false) {
+    $("#about-text").slideDown("slow");
+    arrow.addClass("upside-down-arrow");
+  }else{
+    $("#about-text").slideUp("slow");
+    arrow.removeClass("upside-down-arrow");
+  }
+
+
+};
+
+// $("#about-text").slideDown("slow");
+// $(".down-arrow").attr("class","upside-down-arrow");
+// $(".arrow-down-btn").on("click", slideAboutUp);
+//
+// const slideAboutUp = () => {
+//     $("#about-text").slideUp("slow");
+//     $(".upside-down-arrow").attr("class","down-arrow");
+//     //$(".arrow-down-btn").on("click",slideAboutDown);
+//   };
+
+$(".arrow-down-btn").on("click", switchArrow);
+
 
 $(".search-form").on("submit", (event) => {
     event.preventDefault();
@@ -124,9 +152,9 @@ const positionDiceAndView = (winner) => {
     $("#dice-roll-img").toggle(500);
     $("#dice-roll-img").attr("class", "");
     $("#dice-roll-img").toggle(500);
+    displayWinner(winner);
   },
   5000);
-  displayWinner(winner);
   //$("#display-card"+winner).append("#dice-roll-img");
   //$("#dice-roll-img").css({"z-index": 0, "position":"static", "top":"", "right":"", "transform": "scale(1)", "transition-duration": "3s"});
   // $("#dice-roll-img").css({"z-index": 1, "position":"relative", "top":"300px", "right":"10%", "transform": "scale(2)"});
@@ -162,10 +190,16 @@ const displayWinner = (winner) => {
   $winnerModalTextbox.append("<h2>And the winner is...");
   $winnerModalTextbox.append("<h1>"+selectedGames[winner].name);
   $winnerModalTextbox.append("<img src="+selectedGames[winner].images.large+">");
+  const $closeBtn = $("<button id='winner-modal-close'>Close</button>");
+  $closeBtn.on("click", () => {
+    console.log("click");
+    $("#winner-modal").hide(500);
+  });
+  $winnerModalTextbox.append($closeBtn);
   $winnerModal.append($winnerModalTextbox);
-  setTimeout(() => {
+
     $winnerModal.toggle(500);
-  },5000);
+  //setTimeout(() => {},5000);
 };
 
 

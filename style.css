@@ -61,14 +61,43 @@ main {
   flex-flow: column;
   justify-content: center;
 }
+.about-tab h3 {
+  text-align: center;
+}
+.about-tab p {
+  display: none;
+  background: lightgrey;
+}
+
 /* used how to on w3schools for arrow https://www.w3schools.com/howto/howto_css_arrows.asp */
-i {
+.down-arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 7px;
   transform: rotate(45deg);
+  transition-duration: 1s;
 }
+/* .arrow-down-btn{
+  width: 10px;
+} */
+.arrow-down-btn:hover {
+  animation-name: arrow-pulse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes arrow-pulse{
+  0% {transform: scale(1);}
+  50% {transform: scale(1.15);}
+  100% {transform: scale(1);}
+}
+
+.upside-down-arrow {
+  transform: rotate(225deg);
+  transition-duration: 1s;
+}
+
 .search-bar {
   margin: 1em 0;
 }
