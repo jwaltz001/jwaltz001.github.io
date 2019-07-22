@@ -180,11 +180,11 @@ dd {
   border-top: 3pt solid black;
 }
 
-#lower-game-display {
+/* #lower-game-display {
   /* border-top: 3pt solid black; */
   border-bottom: 3pt solid black;
   flex-flow: row-reverse;
-}
+} */
     /* =======Random Selector======== */
 .random-selector {
   margin-bottom: 2em;

@@ -42,8 +42,6 @@ const switchArrow = () => {
     $("#about-text").slideUp("slow");
     arrow.removeClass("upside-down-arrow");
   }
-
-
 };
 
 $(".arrow-down-btn").on("click", switchArrow);
@@ -115,6 +113,8 @@ const getGameInfo = (event) => {
           makeDomElement.makeBtn(idForCard, "choose-game-btn", "choose-game-btn"+selectedGameIndex, selectedGameIndex, "Choose");
           makeDomElement.makeBtn(idForCard, "info-game-btn", "info-game-btn"+selectedGameIndex, selectedGameIndex, "More Info");
           $("#card-container"+selectedGameIndex).toggle(800);
+          $(".choose-game-btn").on("click", passWinnerToDisplay);
+          $(".info-game-btn").on("click", getMoreInfo);
         },
         (error) => {
           console.log(error);
@@ -122,14 +122,12 @@ const getGameInfo = (event) => {
       );
 };
 
-
     //=======More info call=========
 const getMoreInfo = (event) => {
   const $gameArrIndex = $(event.target).val();
   $("#display-card"+$gameArrIndex).toggle();
   const $infoModal = $("#info-modal-textbox");
-  console.log($infoModal);
-  $(".display-card-container").append($infoModal);
+  $("#card-container"+$gameArrIndex).append($infoModal);
   $("#info-title").text(selectedGames[$gameArrIndex].name);
   $("#info-image").attr("src", selectedGames[$gameArrIndex].images.small);
   $("#info-description").text(selectedGames[$gameArrIndex].description_preview);
@@ -142,10 +140,10 @@ const getMoreInfo = (event) => {
 //put close on info modal (background)?
   });
   getVideo();
-  $("#info-modal-textbox").toggle();
+  $($infoModal).css("display","block");
   //**************** insert game videos***************
 };
-$(".info-game-btn").on("click", getMoreInfo);
+
 
 const getVideo = () => {
   const $gameId = selectedGames[$(event.target).val()].id;
@@ -170,12 +168,11 @@ const passWinnerToDisplay = () => {
   displayWinner(winner);
 };
 
-$(".choose-game-btn").on("click", passWinnerToDisplay);
-
 const displayWinner = (winner) => {
   const $winnerModal = $("<div>").attr("id","winner-modal");
   $("body").append($winnerModal);
   const $winnerModalTextbox = $("<div>").attr("id","winner-modal-textbox");
+//could use obj to make now
   $winnerModalTextbox.append("<h2>And the winner is...");
   $winnerModalTextbox.append("<h1>"+selectedGames[winner].name);
   $winnerModalTextbox.append("<img src="+selectedGames[winner].images.large+">");
@@ -185,7 +182,6 @@ const displayWinner = (winner) => {
   $winnerDl.append("<dd>" + selectedGames[winner].designers + "</dd>");
   const $closeBtn = $("<button id='winner-modal-close'>Close</button>");
   $closeBtn.on("click", () => {
-    //console.log("click");
     $("#winner-modal").hide(500);
   });
   $winnerModalTextbox.append($closeBtn);
