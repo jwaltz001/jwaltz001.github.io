@@ -24,7 +24,7 @@ header {
   color: white;
   font-weight: 700;
   padding: 0;
-  background-image: url("https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-image: url("images/header.jpeg");
   background-position: center;
   background-size: cover;
 }
@@ -74,8 +74,8 @@ main {
 }
 .about-tab p {
   display: none;
-  /* background: lightgrey; */
-  /* width: 150%; */
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 15pt;
   border-top: 1pt solid black;
   border-bottom: 1pt solid black;
 }
@@ -203,13 +203,13 @@ dd {
 }
 .clicked-random {
   animation-name: dice-animation;
-  animation-duration: 5s;
-  animation-timing-function: linear;
+  animation-duration: 6s;
+  /* animation-timing-function: linear; */
 }
 @keyframes dice-animation{
   0% {transform: scale(1);}
-  50% {transform: translate(0, -300px) scale(3) rotate(800deg);}
-  100% {transform: translate(0, -600px) scale(4) rotate(1600deg);}
+  50% {transform: translate(0, -300px) scale(3);}
+  100% {transform: translate(0, -600px) scale(5) rotate(1600deg);}
 }
 
 /* animate to spin out */
@@ -285,7 +285,7 @@ footer h5 {
 footer a:hover{
   text-decoration: underline;
 }
-/* media break point */
+/*================= media break point==================== */
 
 @media (min-width: 600px) {
   .display-card-container {

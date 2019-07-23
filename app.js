@@ -111,9 +111,8 @@ const getGameInfo = (event) => {
 
     //=======More info call=========
 const getMoreInfo = (event) => {
-  console.log("clicked");
   const $gameArrIndex = $(event.currentTarget).val();
-  console.log($gameArrIndex);
+  //const $infoModal = makeDomElement.makeDiv("#more-info-display","display-cards", "info-modal-textbox");
   const $infoModal = $("#info-modal-textbox");
   $("#more-info-display").append($infoModal);
   $("#info-title").text(selectedGames[$gameArrIndex].name);
@@ -125,7 +124,6 @@ const getMoreInfo = (event) => {
   $("#info-close").on("click", closeMoreInfo);
   getVideo($gameArrIndex);
   $($infoModal).css("display","block");
-  //**************** insert game videos***************
 };
 
 const getVideo = ($gameArrIndex) => {
@@ -155,7 +153,7 @@ const closeMoreInfo = (event) => {
   $("iframe").attr("src","");
 };
 //Figure out how to stop video on close
-//put close on info modal (background)?
+//put close on info modal (background)
 
 //=======================Choose Winner functions=========================
 const passWinnerToDisplay = () => {
@@ -176,7 +174,7 @@ const displayWinner = (winner) => {
   $winnerDl.append("<dd>" + selectedGames[winner].designers + "</dd>");
   const $closeBtn = $("<button id='winner-modal-close'>Close</button>");
   $closeBtn.on("click", () => {
-    $("#winner-modal").toggle(500);
+    $("#winner-modal").remove();
     $(".game-display-area").css({"transform": "scale(1)", "transition-duration": "3s"});
   });
   $winnerModalTextbox.append($closeBtn);
