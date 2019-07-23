@@ -1,6 +1,5 @@
 $(() => {
 //===============Global Variables=======================
-    //===========API URL Variables================
 let bgaUrlInsert = "";
 let selectedGames = [];
 //===============Objects with commonly used code=======================

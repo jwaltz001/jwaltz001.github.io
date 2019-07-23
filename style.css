@@ -13,6 +13,10 @@ button:hover {
   background: black;
   color: white;
 }
+button:focus {
+  outline: none;
+}
+
 /* ========================Header===================== */
 header {
   height: 15em;
