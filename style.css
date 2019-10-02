@@ -252,6 +252,7 @@ dd {
 }
 #info-header{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -267,9 +268,9 @@ dd {
   align-items: flex-start;
 }
 .info-video-div {
-  display: flex;
+  /* display: flex;
   flex-flow: column wrap;
-  width:30%;
+  width:30%; */
   margin: .25em;
 }
 .info-video-div p {
@@ -301,8 +302,19 @@ info-video-div iframe{
   padding: 1em;
   border-radius: 7pt;
 }
+#winner-modal-textbox img {
+	width: 100%;
+}
+#winner-modal-close {
+	width: 100%;
+	font-size: 20pt;
+	padding: .75em;
+}
 /* ========================Footer===================== */
 footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-top: 1pt solid grey;
   background: white;
   height: auto;
@@ -310,7 +322,6 @@ footer {
 footer h5 {
   margin: 0 auto;
   padding: 2em;
-  width: 20%;
 }
 footer a:hover{
   text-decoration: underline;
@@ -349,7 +360,22 @@ footer a:hover{
 	dd {
 		margin-left: 3rem;
 	}
+	#info-header{
+		flex-direction: row;
+	}
 	#vids-dd {
+		flex-direction: row;
+	}
+	.info-video-div {
+	  display: flex;
+	  flex-flow: column wrap;
+	  width:30%;
+  	}
+	#winner-modal-textbox img {
+		height: 500px;
+		width: auto;
+	}
+	footer {
 		flex-direction: row;
 	}
 }
