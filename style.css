@@ -1,3 +1,7 @@
+@-ms-viewport{
+  width: device-width;
+}
+
 /* ========================General Formatting===================== */
 body {
   margin: 0;
@@ -9,6 +13,9 @@ a {
   text-decoration: none;
   color: inherit;
 }
+button {
+	background: transparent;
+}
 button:hover {
   background: black;
   color: white;
@@ -19,6 +26,7 @@ button:focus {
 input:focus {
   outline: none;
 }
+
 /* ========================Header===================== */
 header {
   height: 15em;
@@ -32,7 +40,7 @@ header {
   padding: 0;
   background-image: url("images/header.jpeg");
   background-position: center;
-  background-size: cover;
+  background-size: 300% 300%;
 }
 .header-filter {
   background: rgba(0,0,0,.3);
@@ -44,31 +52,37 @@ header {
   align-items: center;
 }
 .header-filter > h1{
-  font-size: 50pt;
+  font-size: 30pt;
 }
 header h1, h3 {
   margin: 0;
+  text-align: center;
 }
 .logo {
   font-weight: 900;
-  margin: 0 1.5em 1em 1.5em;
+  margin: 0 .5em .5em .5em;
 }
+
 /* ========================Main Section of App===================== */
 main {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  padding: 1em;
+  padding: 0;
 }
+
     /* ==============Search for Games===============*/
 .search-section {
   width: 90%;
-  /* height: 10em; */
   margin: 0;
   padding: 1em;
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+.search-bar > form {
+	display: flex;
+	flex-direction: column;
 }
 .about-tab {
   display: flex;
@@ -85,8 +99,6 @@ main {
   border-top: 1pt solid black;
   border-bottom: 1pt solid black;
 }
-
-/* used how to on w3schools for arrow https://www.w3schools.com/howto/howto_css_arrows.asp */
 .down-arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -134,8 +146,11 @@ input {
 }
 
   /* ==============Games to compare/Display===============*/
+#loading-screen {
+	display: none;
+}
 .game-display-area {
-  width: 98%;
+  width: 100%;
   min-height: 400px;
   height: auto;
   background: firebrick;
@@ -155,16 +170,16 @@ input {
 }
 .display-cards {
   width: 100%;
-  height: 40em;
   text-align: center;
   border: 2pt solid black;
   border-radius: 7pt;
   box-shadow: 5px 0;
   background: white;
+  overflow-y: scroll;
 }
-.display-cards > img {
-  width: auto;
-  height: 30%;
+.display-cards img {
+  max-width: 95%;
+  max-height: 30%;
 }
 dt {
   font-weight: 700;
@@ -173,12 +188,15 @@ dd {
   text-align: left;
   font-family: 'Darker Grotesque', sans-serif;
   font-size: 15pt;
+  margin-left: 1rem;
 }
 .display-cards button {
-  border: 1pt solid grey;
-  padding: .25em;
-  margin: .25em;
+  border: 1pt solid black;
+  border-bottom: none;
+  padding: .75em;
+  margin: 0;
   font-size: 14pt;
+  width: 50%;
 }
 .game-descriptions {
   height: 5em;
@@ -240,10 +258,13 @@ dd {
 #info-header h1 {
   margin-right: 2em;
 }
+#info-website, #info-rules {
+	border-bottom: 1pt solid black;
+}
 #vids-dd {
   display: flex;
-  flex-flow: wrap;
-  align-items: flex-end;
+  flex-flow: column wrap;
+  align-items: flex-start;
 }
 .info-video-div {
   display: flex;
@@ -256,6 +277,9 @@ dd {
 }
 info-video-div iframe{
   width: 100%
+}
+#info-close {
+	border-bottom: 1pt solid black;
 }
 /* ================winner-modal================== */
 #winner-modal {
@@ -294,6 +318,38 @@ footer a:hover{
 /*================= media break point==================== */
 
 @media (min-width: 600px) {
-  .display-card-container {
-    width: 46%;
- }
+	header {
+		background-size: cover;
+	}
+	.header-filter > h1{
+	  font-size: 50pt;
+	}
+	header h1, header h3 {
+	  margin: 0;
+	}
+	.logo {
+	  font-weight: 900;
+	  margin: 0 1.5em 1em 1.5em;
+	}
+	main {
+		padding: 1em;
+	}
+	.search-bar > form {
+		flex-direction: row;
+	}
+	.game-display-area {
+	  	width: 98%;
+  	}
+	.display-card-container {
+    	width: 46%;
+	}
+	.display-cards {
+	  	height: 40em;
+  	}
+	dd {
+		margin-left: 3rem;
+	}
+	#vids-dd {
+		flex-direction: row;
+	}
+}

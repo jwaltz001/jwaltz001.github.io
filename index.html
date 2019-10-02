@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 <!-- SCRIPTS -->
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -43,8 +44,8 @@
             <input type="submit" value="Find" id="search-btn">
           </form>
         </div>
-        <div class="results-display">
-        </div>
+		<h2 id="loading-screen">Loading</h2>
+        <div class="results-display"></div>
       </section>
 
   <!-- More info selection -->
@@ -57,7 +58,7 @@
       <section class="random-selector">
           <h2>Still can't decide?</h2>
           <div class="randomizer-button">
-            <img class = "" id="dice-roll-img" src="images/dice.png" alt="">
+            <img class="" id="dice-roll-img" src="images/dice.png" alt="">
             <h3>Choose for me</h3>
           </div>
       </section>
@@ -98,6 +99,7 @@
       </div>
 <!-- Footer -->
     <footer>
+      <h5>Powered by <a href="#" target= "_blank">Board Game Atlas</a></h5>
       <h5>Developed by <a href="#" target= "_blank">Justin Waltz</a></h5>
     </footer>
   </body>

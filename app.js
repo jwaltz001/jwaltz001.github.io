@@ -64,48 +64,54 @@ const getBgaSearchResults = () => {
 };
 
     //=======Game display call=========
+$(document).ajaxStart(() => {
+	$("#loading-screen").css("display", "block");
+})
+$(document).ajaxComplete(() => {
+	$("#loading-screen").css("display", "none");
+})
 const getGameInfo = (event) => {
   const $gameId = $(event.target).val();
   bgaUrlInsert = "https://www.boardgameatlas.com/api/search?ids="+$gameId+"&client_id=tIPZB6stZR";
   $.ajax({
         url: bgaUrlInsert,
-        //is "type" necessary?
-        //type: "GET"
       }).then(
         (data) => {
-          const selectedObj = data.games[0];
-          //console.log(selectedObj);
-          selectedGames.push(selectedObj);
-          const selectedGameIndex = selectedGames.length-1;
-          const $newCardContainer = $(".game-display-area").prepend("<div class = 'display-card-container' id = 'card-container" + selectedGameIndex+"'</div>");
-          makeDomElement.makeDiv("#card-container" + selectedGameIndex,"display-cards","display-card" + selectedGameIndex);
-          const idForCard = "#display-card" + selectedGameIndex;
-          makeDomElement.makeH1(idForCard,"card_h1","title-game" + selectedGameIndex, selectedObj.name);
-          makeDomElement.makeImg(idForCard, selectedObj.thumb_url, "image-game"+ selectedGameIndex);
-          makeDomElement.makeDl(idForCard, "game_card_dl", "game_card_dl"+ selectedGameIndex);
-          const idForList = "#game_card_dl"+ selectedGameIndex;
-          makeDomElement.makeDt(idForList, "Year Published");
-          makeDomElement.makeDd(idForList, selectedObj.year_published);
-          makeDomElement.makeDt(idForList, "Number of players");
-          makeDomElement.makeDd(idForList, "Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
-          makeDomElement.makeDt(idForList, "Playtime (in minutes)");
-          makeDomElement.makeDd(idForList, "Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
-          makeDomElement.makeDt(idForList, "Price (MSRP)");
-          makeDomElement.makeDd(idForList, "$" + selectedObj.msrp);
-          makeDomElement.makeDt(idForList, "Number of Mentions on /r/boardgames");
-          makeDomElement.makeDd(idForList, selectedObj.reddit_all_time_count + " (Since Sept. 2018) || " + selectedObj.reddit_week_count + " (In the past week)");
-          makeDomElement.makeDt(idForList, "Average Rating on Board Game Atlas");
-          makeDomElement.makeDd(idForList, selectedObj.average_user_rating.toFixed(2));
-          makeDomElement.makeBtn(idForCard, "choose-game-btn", "choose-game-btn"+selectedGameIndex, selectedGameIndex, "Choose");
-          makeDomElement.makeBtn(idForCard, "info-game-btn", "info-game-btn"+selectedGameIndex, selectedGameIndex, "<a href = '#more-info-display'>More Info</a>");
-          $("#card-container"+selectedGameIndex).toggle("slow", "linear");
-          $(".choose-game-btn").on("click", passWinnerToDisplay);
-          $(".info-game-btn").on("click", getMoreInfo);
+			const selectedObj = data.games[0];
+			//console.log(selectedObj);
+			selectedGames.push(selectedObj);
+			const selectedGameIndex = selectedGames.length-1;
+			const $newCardContainer = $(".game-display-area").prepend("<div class = 'display-card-container' id = 'card-container" + selectedGameIndex+"'</div>");
+			makeDomElement.makeDiv("#card-container" + selectedGameIndex,"display-cards","display-card" + selectedGameIndex);
+			const idForCard = "#display-card" + selectedGameIndex;
+			makeDomElement.makeH1(idForCard,"card_h1","title-game" + selectedGameIndex, selectedObj.name);
+			makeDomElement.makeImg(idForCard, selectedObj.thumb_url, "image-game"+ selectedGameIndex);
+			makeDomElement.makeDl(idForCard, "game_card_dl", "game_card_dl"+ selectedGameIndex);
+			const idForList = "#game_card_dl"+ selectedGameIndex;
+			makeDomElement.makeDt(idForList, "Year Published");
+			makeDomElement.makeDd(idForList, selectedObj.year_published);
+			makeDomElement.makeDt(idForList, "Number of players");
+			makeDomElement.makeDd(idForList, "Min: " + selectedObj.min_players + "  Max: " + selectedObj.max_players);
+			makeDomElement.makeDt(idForList, "Playtime (in minutes)");
+			makeDomElement.makeDd(idForList, "Min: " + selectedObj.min_playtime + "  Max: " + selectedObj.max_playtime);
+			makeDomElement.makeDt(idForList, "Price (MSRP)");
+			makeDomElement.makeDd(idForList, "$" + selectedObj.msrp);
+			makeDomElement.makeDt(idForList, "Number of Mentions on /r/boardgames");
+			makeDomElement.makeDd(idForList, selectedObj.reddit_all_time_count + " (Since Sept. 2018) || " + selectedObj.reddit_week_count + " (In the past week)");
+			makeDomElement.makeDt(idForList, "Average Rating on Board Game Atlas");
+			makeDomElement.makeDd(idForList, selectedObj.average_user_rating.toFixed(2)+ " (out of 5.00)");
+			makeDomElement.makeBtn(idForCard, "choose-game-btn", "choose-game-btn"+selectedGameIndex, selectedGameIndex, "Play this!");
+			makeDomElement.makeBtn(idForCard, "info-game-btn", "info-game-btn"+selectedGameIndex, selectedGameIndex, "<a href = '#more-info-display'>More Info</a>");
+			$("#card-container"+selectedGameIndex).toggle("slow", "linear");
+			$(".choose-game-btn").on("click", passWinnerToDisplay);
+			$(".info-game-btn").on("click", getMoreInfo);
         },
         (error) => {
-          console.log(error);
+          	console.log(error);
         }
       );
+	$(".results-display").empty();
+	$("#search-input").val("");
 };
 
     //=======More info call=========
